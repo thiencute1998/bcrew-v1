@@ -85,7 +85,8 @@
         CKEDITOR.replace('description', {
             filebrowserUploadUrl: "{{route('floor-plan-upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form',
-            height: 600
+            height: 600,
+            colors: 'CF5D4E,454545,FFF,DDD,CCEAEE,66AB16'
         });
 
         $(document).ready(function(){

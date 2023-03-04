@@ -15,7 +15,8 @@
                     <li>
                         <a href="admin/services" aria-expanded="true"><i class="ti-dashboard"></i><span>Services</span></a>
                         <ul class="collapse">
-                            <li class="active"><a href="{{ route('photo-editing') }}">Photo Editing</a></li>
+                            <li class="active"><a href="{{ route('service-introduce') }}">Introduce</a></li>
+                            <li><a href="{{ route('photo-editing') }}">Photo Editing</a></li>
                             <li><a href="{{ route('virtual-staging') }}">Virtual staging</a></li>
                             <li><a href="{{ route('floor-plan') }}">Floor plan</a></li>
                             <li><a href="{{ route('video-slideshow') }}">Video slideshow</a></li>

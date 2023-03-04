@@ -29,7 +29,7 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <form id="product-form" name="product-form" action="{{ route('photo-editing-update', ['id'=> $product->id]) }}" method="POST" enctype="multipart/form-data" class="dropzone border-0">
+                                <form id="product-form" name="product-form" action="{{ route('service-introduce-update', ['id'=> $service->id]) }}" method="POST" enctype="multipart/form-data" class="dropzone border-0">
                                     @csrf
                                     @if (session('edit-success'))
                                         <h5 class="product-message mb-2 text-success">{{ session('edit-success') }}</h5>
@@ -38,37 +38,31 @@
                                     <input type="hidden" id="product-id">
                                     <div class="form-group">
                                         <label for="product-name" class="col-form-label">Name</label>
-                                        <input class="form-control" name="name" type="text" value="{{ $product->name }}" id="product-name" required>
+                                        <input class="form-control" name="name" type="text" value="{{ $service->name }}" id="product-name" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="product-description" class="col-form-label">Description</label>
-                                        <textarea class="form-control" name="description" type="text" id="description" required >
-                                            {{ $product->description }}
+                                        <label for="product-name" class="col-form-label">Content</label>
+                                        <textarea class="form-control" name="content" type="text" >
+                                            {{ $service->content }}
                                         </textarea>
                                     </div>
                                     <div class="images-collection">
-                                        <input type="hidden" class="product-total-images" name="total_image" value="{{  $product->productImages ? $product->productImages->count() : 1 }}">
+                                        <input type="hidden" class="product-total-images" name="total_image" value="{{  $service->serviceImages->count() ? $service->serviceImages->count() : 1 }}">
                                         <label for="" class="col-form-label">Images</label>
                                         <div class="form-group row">
-                                            @if($product->productImages->count())
-                                                @foreach($product->productImages as $key=> $image)
+                                            @if($service->serviceImages->count())
+                                                @foreach($service->serviceImages as $key=> $image)
                                                 <div class="form-group product-images mr-3">
                                                     <div class="d-flex">
                                                         <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                            <input type="hidden" class="image-hidden" name="file_start_hidden{{$key + 1}}" value="{{ $image->file_1 }}">
-                                                            <input type="hidden" class="image-hidden" name="file_start_name_hidden{{$key + 1}}" value="{{ $image->file_name_1 }}">
-                                                            <input type="file" class="files-upload" name="file_start{{$key + 1}}">
-                                                            <img width="150px" height="150px" class="product-img" src="{{ asset('upload/admin/services/photo_editing/'. $image->file_name_1) }}">
-                                                        </div>
-                                                        <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                            <input type="hidden" class="image-hidden" name="file_end_hidden{{$key + 1}}" value="{{ $image->file_2 }}">
-                                                            <input type="hidden" class="image-hidden" name="file_end_name_hidden{{$key + 1}}" value="{{ $image->file_name_2 }}">
-                                                            <input type="file" class="files-upload" name="file_end{{$key + 1}}">
-                                                            <img width="150px" height="150px" class="product-img" src="{{ asset('upload/admin/services/photo_editing/'. $image->file_name_2) }}">
+                                                            <input type="hidden" class="image-hidden" name="file{{$key + 1}}" value="{{$image->file}}">
+                                                            <input type="hidden" class="image-hidden" name="file_name{{$key + 1}}" value="{{$image->file_name}}">
+                                                            <input type="file" class="files-upload" name="files{{$key + 1}}">
+                                                            <img width="150px" height="150px" class="product-img" src="{{ asset('upload/admin/services/introduce/'. $image->file_name) }}">
                                                         </div>
                                                         <div class="zoomimages" style="align-self: center;">
                                                             <div class="dlmedium">
-                                                                <button type="button" class="btn remove-images" title="Remove partner images">
+                                                                <button type="button" class="btn remove-images" title="Remove image">
                                                                     <i class="fa fa-trash"></i>
                                                                 </button>
                                                             </div>
@@ -80,11 +74,7 @@
                                                 <div class="form-group product-images mr-3">
                                                     <div class="d-flex">
                                                         <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                            <input type="file" class="files-upload" name="file_start1">
-                                                            <img width="150px" height="150px" class="product-img">
-                                                        </div>
-                                                        <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                            <input type="file" class="files-upload" name="file_end1">
+                                                            <input type="file" class="files-upload" name="files1">
                                                             <img width="150px" height="150px" class="product-img">
                                                         </div>
                                                         <div class="zoomimages" style="align-self: center;">
@@ -115,15 +105,8 @@
             </div>
         </div>
     </div>
-    <script src="//cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
     <script src="{{ asset('assets/admin/js/jquery341.min.js') }}"></script>
     <script type="text/javascript">
-        CKEDITOR.replace('description', {
-            filebrowserUploadUrl: "{{route('photo-editing-upload', ['_token' => csrf_token() ])}}",
-            filebrowserUploadMethod: 'form',
-            height: 600
-        });
-
         $(document).ready(function(){
             $('.product-message').delay(5000).fadeOut();
 
@@ -138,12 +121,8 @@
                     '<div class="form-group product-images mr-3">' +
                     '<div class="d-flex">'+
                     '<div class="mb-3 mr-2 image-item" style="position: relative">' +
-                    '<input type="file" class="files-upload" name="file_start' + totalImage + '">' +
+                    '<input type="file" class="files-upload" name="files' + totalImage + '">' +
                     '<img width="150px" height="150px" class="product-img">' +
-                    '</div>'+
-                    '<div class="mb-3 mr-2 image-item" style="position: relative">'+
-                    '<input type="file" class="files-upload" name="file_end' + totalImage + '">'+
-                    '<img width="150px" height="150px" class="product-img">'+
                     '</div>'+
                     '<div class="zoomimages" style="align-self: center;">'+
                     '<div class="dlmedium">'+

@@ -14,6 +14,9 @@ use App\Http\Controllers\Admin\Banner\LogoController;
 use App\Http\Controllers\Admin\Banner\SlideController;
 use App\Http\Controllers\Admin\Banner\BannerContactController;
 use App\Http\Controllers\Admin\HowToWorkController;
+use App\Http\Controllers\Admin\Service\ServiceIntroduceController;
+
+use App\Http\Controllers\Viewer\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +28,6 @@ use App\Http\Controllers\Admin\HowToWorkController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.layouts.master')->name('admin-master');
-});
 Route::get('/test', function () {
     return view('admin.layouts.test');
 });
@@ -61,6 +61,12 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
 
     // services
     Route::prefix('services')->group(function () {
+
+        Route::prefix('introduce')->group(function() {
+            Route::get('/', [ServiceIntroduceController::class, 'index'])->name('service-introduce');
+            Route::get('/edit/{id}', [ServiceIntroduceController::class, 'edit'])->name('service-introduce-edit');
+            Route::post('/update/{id}', [ServiceIntroduceController::class, 'update'])->name('service-introduce-update');
+        });
 
         Route::prefix('photo-editing')->group(function() {
             Route::get('/', [PhotoEditingController::class, 'index'])->name('photo-editing');
@@ -163,6 +169,11 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
     });
 });
 
+Route::get('/', function() {
+    return view('viewer.pages.home');
+});
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 //Route::get('insert', function() {
 //    for ($i = 1; $i <= 100; $i++) {

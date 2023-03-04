@@ -32,9 +32,6 @@ class SlideRepository extends BaseRepository {
     public function store($params) {
         DB::beginTransaction();
         try {
-            if ($params['status'] == 1) {
-                Slide::where('status', 1)->update(['status'=> 0]);
-            }
             $slide = new $this->model;
             if (isset($params['file'])) {
                 $file = $params['file'];
@@ -62,9 +59,6 @@ class SlideRepository extends BaseRepository {
         $slide = $this->model->findOrFail($id);
         DB::beginTransaction();
         try {
-            if ($params['status'] == 1) {
-                Slide::where('status', 1)->where('id', '!=', $id)->update(['status'=> 0]);
-            }
             if (isset($params['file'])) {
                 $file = $params['file'];
                 $fileName = time() . $this->generateRandomString() . "." . $file->extension();
