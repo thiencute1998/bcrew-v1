@@ -50,7 +50,6 @@ class VirtualStagingController extends Controller
     }
 
     public function upload(Request $request) {
-        $params = $request->only('product_id', 'file');
-        $this->repository->upload($params);
+        $this->repository->upload($request);
     }
 }

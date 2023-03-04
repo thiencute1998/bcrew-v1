@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Banner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateProductRequest;
 use App\Http\Requests\Admin\EditProductRequest;
-use App\Repositories\Admin\FloorPlanRepository;
+use App\Repositories\Admin\Banner\LogoRepostiory;
+use App\Repositories\Admin\PhotoEditingRepository;
 use Illuminate\Http\Request;
 
-class FloorPlanController extends Controller
+class LogoController extends Controller
 {
     //
     private $repository;
-    public function __construct(FloorPlanRepository $repository)
+    public function __construct(LogoRepostiory $repository)
     {
         $this->repository = $repository;
     }
@@ -23,23 +24,22 @@ class FloorPlanController extends Controller
     }
 
     public function create() {
-        return view('admin.pages.services.floor-plan.create');
+        return view('admin.pages.banner.logo.create');
     }
 
-    public function store(CreateProductRequest $request) {
-        $params = $request->all();
+    public function store(Request $request) {
+        $params = $request->only('name', 'status', 'file');
         $this->repository->store($params);
         return redirect()->back()->with('add-success', 'Add success !!!');
     }
 
     public function edit($id) {
-        $product = $this->repository->edit($id);
-//        dd($product->productImages());
-        return view('admin.pages.services.floor-plan.edit', compact('product'));
+        $logo = $this->repository->edit($id);
+        return view('admin.pages.banner.logo.edit', compact('logo'));
     }
 
-    public function update(EditProductRequest $request, $id) {
-        $params = $request->all();
+    public function update(Request $request, $id) {
+        $params = $request->only('name', 'status', 'file');
         $this->repository->update($params, $id);
         return redirect()->back()->with('edit-success', 'Edit success !!!');
     }
@@ -47,9 +47,5 @@ class FloorPlanController extends Controller
     public function delete($id) {
         $this->repository->delete($id);
         return redirect()->back()->with('delete-success', 'Delete success !!!');
-    }
-
-    public function upload(Request $request) {
-        $this->repository->upload($request);
     }
 }

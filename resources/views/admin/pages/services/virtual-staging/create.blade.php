@@ -16,14 +16,6 @@
         .product-img{
             height: 150px;
         }
-        .product-videos {
-            position: relative;
-        }
-        .remove-video {
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
     </style>
 
 @endsection
@@ -37,7 +29,7 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <form id="product-form" name="product-form" action="{{ route('products-store') }}" method="POST" enctype="multipart/form-data" class="dropzone border-0">
+                                <form id="product-form" name="product-form" action="{{ route('virtual-staging-store') }}" method="POST" enctype="multipart/form-data" class="dropzone border-0">
                                     @csrf
                                     @if (session('add-success'))
                                         <h5 class="product-message mb-2 text-success">{{ session('add-success') }}</h5>
@@ -52,15 +44,6 @@
                                         <label for="product-description" class="col-form-label">Description</label>
                                         <textarea class="form-control" name="description" type="text" id="description" required >
                                         </textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="services" class="col-form-label">Service</label>
-                                        <select class="custom-select product-service" name="service_id" id="services">
-                                            <option value="1" selected>PHOTO EDTITING</option>
-                                            <option value="2">VITURAL STAGING</option>
-                                            <option value="3">FLOOR PLAN</option>
-                                            <option value="4">VIDEO SLIDESHOW</option>
-                                        </select>
                                     </div>
                                     <div class="images-collection">
                                         <input type="hidden" class="product-total-images" name="total_image" value="1">
@@ -87,24 +70,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="videos-collection d-none">
-                                        <label for="" class="col-form-label">Link videos</label>
-                                        <div class="row">
-                                            <div class="col-4 form-group product-videos">
-                                                <input class="form-control" name="videos[]" type="text">
-                                                <button type="button" class="btn remove-video" title="Remove partner images">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <button type="button" class="btn add-videos" title="Add video">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                 </form>
                             </div>
@@ -118,8 +83,9 @@
     <script src="{{ asset('assets/admin/js/jquery341.min.js') }}"></script>
     <script type="text/javascript">
         CKEDITOR.replace('description', {
-            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-            filebrowserUploadMethod: 'form'
+            filebrowserUploadUrl: "{{route('virtual-staging-upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form',
+            height: 600
         });
 
         $(document).ready(function(){
@@ -167,33 +133,6 @@
                 $(this).closest('.product-images').remove();
             })
 
-            $(document).on('click', '.add-videos', function() {
-                $('.product-videos').last().after(
-                    '<div class="col-4 form-group product-videos">' +
-                    '<input class="form-control" name="videos[]" type="text">' +
-                    '<div class="dlmedium">'+
-                        '<button type="button" class="btn remove-video" title="Remove partner images">'+
-                            '<i class="fa fa-trash"></i>'+
-                            '</button>'+
-                        '</div>'+
-                    '</div>'
-                )
-            })
-
-            $('.product-service').on('change', function() {
-                let serviceType = $(this).val();
-                if (serviceType == 4) {  // Video
-                    $('.videos-collection').removeClass('d-none');
-                    $('.images-collection').addClass('d-none');
-                } else {
-                    $('.images-collection').removeClass('d-none');
-                    $('.videos-collection').addClass('d-none');
-                }
-            });
-
-            $(document).on('click', '.remove-video', function() {
-                $(this).closest('.product-videos').remove()
-            })
         })
     </script>
 @endsection

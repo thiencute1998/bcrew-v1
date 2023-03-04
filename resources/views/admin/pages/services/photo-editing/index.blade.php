@@ -37,10 +37,10 @@
                             @if (session('delete-success'))
                                 <h5 class="product-message mb-2 text-success">{{ session('delete-success') }}</h5>
                             @endif
-                            <h4 class="header-title">List Products</h4>
+                            <h4 class="header-title">List Photo Editing</h4>
                         </div>
                         <div>
-                            <a class="btn btn-primary" href="{{route('photo-editing-create')}}" data-name="{{route('photo-editing-create')}}">
+                            <a class="btn btn-primary" href="{{route('photo-editing-create')}}">
                                 <i class="ti-plus"></i><span>Add</span>
                             </a>
                         </div>
@@ -86,4 +86,10 @@
         <!-- basic table end -->
     </div>
 </div>
+<script src="{{ asset('assets/admin/js/jquery341.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.product-message').delay(5000).fadeOut();
+    })
+</script>
 @endsection

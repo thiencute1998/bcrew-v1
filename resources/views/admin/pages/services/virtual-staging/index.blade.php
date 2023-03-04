@@ -13,7 +13,7 @@
     <div class="row align-items-center" style="padding: 1.6rem 0;">
         <div class="col-md-6 col-sm-8">
             <div class="search-box pull-left">
-                <form action="{{ route('products') }}" method="GET" >
+                <form action="{{ route('virtual-staging') }}" method="GET" >
                     <input type="text" name="search" placeholder="Search..." value="{{ request()->input('search') }}">
                     <i class="ti-search"></i>
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -37,10 +37,10 @@
                             @if (session('delete-success'))
                                 <h5 class="product-message mb-2 text-success">{{ session('delete-success') }}</h5>
                             @endif
-                            <h4 class="header-title">List Products</h4>
+                            <h4 class="header-title">List Virtual Staging</h4>
                         </div>
                         <div>
-                            <a class="btn btn-primary" href="products/create">
+                            <a class="btn btn-primary" href="{{route('virtual-staging-create')}}">
                                 <i class="ti-plus"></i><span>Add</span>
                             </a>
                         </div>
@@ -61,10 +61,10 @@
                                         <th scope="row">{{$product->name}}</th>
                                         <td>{{$product->description}}</td>
                                         <td>
-                                            <a href="{{ route('products-edit', ['id'=> $product->id]) }}">
+                                            <a href="{{ route('virtual-staging-edit', ['id'=> $product->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="product-remove" href="{{ route('products-delete', ['id'=> $product->id]) }}"
+                                            <a class="product-remove" href="{{ route('virtual-staging-delete', ['id'=> $product->id]) }}"
                                                onclick="return confirm('Are you sure to delete product : {{ $product->name }} ?' )"
                                             >
                                                 <i class="ti-trash"></i>
@@ -86,4 +86,10 @@
         <!-- basic table end -->
     </div>
 </div>
+<script src="{{ asset('assets/admin/js/jquery341.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.product-message').delay(5000).fadeOut();
+    })
+</script>
 @endsection

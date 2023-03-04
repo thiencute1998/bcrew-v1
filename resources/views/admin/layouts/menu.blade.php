@@ -10,7 +10,7 @@
             <nav>
                 <ul class="metismenu" id="menu">
                     <li class="active">
-                        <a href="admin" aria-expanded="true"><i class="ti-dashboard"></i><span>Introduce</span></a>
+                        <a href="#" aria-expanded="true"><i class="ti-dashboard"></i><span>Introduce</span></a>
                     </li>
                     <li>
                         <a href="admin/services" aria-expanded="true"><i class="ti-dashboard"></i><span>Services</span></a>
@@ -24,13 +24,13 @@
                     <li>
                         <a href="admin/banners" aria-expanded="true"><i class="ti-dashboard"></i><span>Banners</span></a>
                         <ul class="collapse">
-                            <li class="active"><a href="logo">Logo</a></li>
-                            <li><a href="slide">Slides</a></li>
-                            <li><a href="contact">Contact</a></li>
+                            <li class="active"><a href="{{route('logos')}}">Logo</a></li>
+                            <li><a href="{{route('slides')}}">Slides</a></li>
+                            <li><a href="{{route('contacts')}}">Contact</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="admin/how-to-works" aria-expanded="true"><i class="ti-dashboard"></i><span>How to works</span></a>
+                        <a href="{{route('works')}}" aria-expanded="true"><i class="ti-dashboard"></i><span>How to work</span></a>
                     </li>
                     <li>
                         <a href="admin/banners" aria-expanded="true"><i class="ti-dashboard"></i><span>Admin</span></a>

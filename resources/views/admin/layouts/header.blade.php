@@ -9,22 +9,20 @@
                 <span></span>
             </div>
             <div class="breadcrumbs-area clearfix">
-                <h4 class="page-title pull-left">Dashboard</h4>
-                <ul class="breadcrumbs pull-left">
-                    <li><a href="index.html">Home</a></li>
-                    <li><span>Dashboard</span></li>
-                </ul>
+{{--                <h4 class="page-title pull-left">Dashboard</h4>--}}
+{{--                <ul class="breadcrumbs pull-left">--}}
+{{--                    <li><a href="">Home</a></li>--}}
+{{--                    <li><span>Dashboard</span></li>--}}
+{{--                </ul>--}}
             </div>
         </div>
         <!-- profile info & task notification -->
         <div class="col-md-6 col-sm-6 text-center">
             <div class="user-profile pull-right mr-1">
                 <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $userLogin ? $userLogin->name : "" }} <i class="fa fa-angle-down"></i></h4>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Message</a>
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Log Out</a>
+                    <a class="dropdown-item" href="{{route('logout-auth')}}">Log Out</a>
                 </div>
             </div>
         </div>

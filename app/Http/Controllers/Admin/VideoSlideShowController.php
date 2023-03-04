@@ -26,7 +26,7 @@ class VideoSlideShowController extends Controller
         return view('admin.pages.services.video-slideshow.create');
     }
 
-    public function store(CreateProductRequest $request) {
+    public function store(Request $request) {
         $params = $request->all();
         $this->repository->store($params);
         return redirect()->back()->with('add-success', 'Add success !!!');
@@ -34,11 +34,10 @@ class VideoSlideShowController extends Controller
 
     public function edit($id) {
         $product = $this->repository->edit($id);
-//        dd($product->productImages());
         return view('admin.pages.services.video-slideshow.edit', compact('product'));
     }
 
-    public function update(EditProductRequest $request, $id) {
+    public function update(Request $request, $id) {
         $params = $request->all();
         $this->repository->update($params, $id);
         return redirect()->back()->with('edit-success', 'Edit success !!!');
@@ -50,7 +49,6 @@ class VideoSlideShowController extends Controller
     }
 
     public function upload(Request $request) {
-        $params = $request->only('product_id', 'file');
-        $this->repository->upload($params);
+        $this->repository->upload($request);
     }
 }

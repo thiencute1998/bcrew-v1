@@ -8,7 +8,11 @@ use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 
+define('FLOOR_PLAN', 3);
 class FloorPlanRepository extends BaseRepository {
+
+    private $linkImages = "upload/admin/services/floor_plan";
+    private $linkUploads = "upload/admin/services/ckeditor";
     public function model()
     {
         return Product::class;
@@ -16,10 +20,12 @@ class FloorPlanRepository extends BaseRepository {
 
     public function index($searchParams) {
         $query = $this->model->query();
+        $query->where('service_id', FLOOR_PLAN);
         if (isset($searchParams['search'])) {
             $search = $searchParams['search'];
             $query->where('name', 'like', "$search%");
         }
+        $query->orderBy('updated_at', 'desc');
         $products = $query->paginate(10);
         return view('admin.pages.services.floor-plan.index', compact('products'));
     }
@@ -31,47 +37,36 @@ class FloorPlanRepository extends BaseRepository {
         DB::beginTransaction();
         try {
             $product = new $this->model;
+            $product->service_id = FLOOR_PLAN;
             $product->fill($params);
             $product->save();
-            if ($params['service_id'] == 4) { // Video
-                if (isset($params['videos'])) {
-                    $videos = $params['videos'];
-                    foreach ($videos as $video) {
-                        $arr[] = [
-                            'product_id'=> $product->id,
-                            'link'=> $video
-                        ];
-                    }
-                    ProductVideo::insert($arr);
+
+            $total = $params['total_image'];
+            for($i = 1; $i <= $total; $i++){
+                $file1= null;
+                $file2= null;
+                $fileName1 = null;
+                $fileName2 = null;
+                if (isset($params['file_start'. $i])) {
+                    $startImage = $params['file_start'. $i];
+                    $fileName1 = time() . $this->generateRandomString() . "." . $startImage->extension();
+                    $startImage->move(public_path($this->linkImages), $fileName1);
+                    $file1 = $startImage->getClientOriginalName();
                 }
-            } else {
-                $total = $params['total_image'];
-                for($i = 1; $i <= $total; $i++){
-                    $file1= null;
-                    $file2= null;
-                    $fileName1 = null;
-                    $fileName2 = null;
-                    if (isset($params['file_start'. $i])) {
-                        $startImage = $params['file_start'. $i];
-                        $fileName1 = time() . $this->generateRandomString() . "." . $startImage->extension();
-                        $startImage->move(public_path("upload/admin/product"), $fileName1);
-                        $file1 = $startImage->getClientOriginalName();
-                    }
-                    if (isset($params['file_end'. $i])) {
-                        $endImage = $params['file_end'. $i];
-                        $fileName2 = time() . $this->generateRandomString() . "." . $endImage->extension();
-                        $endImage->move(public_path("upload/admin/product"), $fileName2);
-                        $file2 = $endImage->getClientOriginalName();
-                    }
-                    if ($file1 || $file2) {
-                        ProductImage::insert([
-                            'product_id'=> $product->id,
-                            'file_1'=> $file1,
-                            'file_name_1'=> $fileName1,
-                            'file_2'=> $file2,
-                            'file_name_2'=> $fileName2,
-                        ]);
-                    }
+                if (isset($params['file_end'. $i])) {
+                    $endImage = $params['file_end'. $i];
+                    $fileName2 = time() . $this->generateRandomString() . "." . $endImage->extension();
+                    $endImage->move(public_path($this->linkImages), $fileName2);
+                    $file2 = $endImage->getClientOriginalName();
+                }
+                if ($file1 || $file2) {
+                    ProductImage::insert([
+                        'product_id'=> $product->id,
+                        'file_1'=> $file1,
+                        'file_name_1'=> $fileName1,
+                        'file_2'=> $file2,
+                        'file_name_2'=> $fileName2,
+                    ]);
                 }
             }
 
@@ -93,61 +88,47 @@ class FloorPlanRepository extends BaseRepository {
         DB::beginTransaction();
         try {
             $product->fill($params);
+            $product->fill($params);
             $product->save();
             ProductImage::where('product_id', $id)->delete();
-            ProductVideo::where('product_id', $id)->delete();
-            if ($params['service_id'] == 4) { // Video
-                if (isset($params['videos'])) {
-                    $arr = [];
-                    $videos = $params['videos'];
-                    foreach ($videos as $video) {
-                        if ($video) {
-                            $arr[] = [
-                                'product_id'=> $product->id,
-                                'link'=> $video
-                            ];
-                        }
-                    }
-                    ProductVideo::insert($arr);
+
+            $total = $params['total_image'];
+            for($i = 1; $i <= $total; $i++){
+                $file1= null;
+                $file2= null;
+                $fileName1 = null;
+                $fileName2 = null;
+                if (isset($params['file_start_hidden'. $i])) {
+                    $file1 = $params['file_start_hidden'. $i];
+                    $fileName1 = $params['file_start_name_hidden'. $i];
                 }
-            } else {
-                $total = $params['total_image'];
-                for($i = 1; $i <= $total; $i++){
-                    $file1= null;
-                    $file2= null;
-                    $fileName1 = null;
-                    $fileName2 = null;
-                    if (isset($params['file_start_hidden'. $i])) {
-                        $file1 = $params['file_start_hidden'. $i];
-                        $fileName1 = $params['file_start_name_hidden'. $i];
-                    }
-                    if (isset($params['file_end_hidden'. $i])) {
-                        $file2 = $params['file_end_hidden'. $i];
-                        $fileName2 = $params['file_end_name_hidden'. $i];
-                    }
-                    if (isset($params['file_start'. $i])) {
-                        $startImage = $params['file_start'. $i];
-                        $fileName1 = time() . $this->generateRandomString() . "." . $startImage->extension();
-                        $startImage->move(public_path("upload/admin/product"), $fileName1);
-                        $file1 = $startImage->getClientOriginalName();
-                    }
-                    if (isset($params['file_end'. $i])) {
-                        $endImage = $params['file_end'. $i];
-                        $fileName2 = time() . $this->generateRandomString() . "." . $endImage->extension();
-                        $endImage->move(public_path("upload/admin/product"), $fileName2);
-                        $file2 = $endImage->getClientOriginalName();
-                    }
-                    if ($file1 || $file2) {
-                        ProductImage::insert([
-                            'product_id'=> $product->id,
-                            'file_1'=> $file1,
-                            'file_name_1'=> $fileName1,
-                            'file_2'=> $file2,
-                            'file_name_2'=> $fileName2,
-                        ]);
-                    }
+                if (isset($params['file_end_hidden'. $i])) {
+                    $file2 = $params['file_end_hidden'. $i];
+                    $fileName2 = $params['file_end_name_hidden'. $i];
+                }
+                if (isset($params['file_start'. $i])) {
+                    $startImage = $params['file_start'. $i];
+                    $fileName1 = time() . $this->generateRandomString() . "." . $startImage->extension();
+                    $startImage->move(public_path($this->linkImages), $fileName1);
+                    $file1 = $startImage->getClientOriginalName();
+                }
+                if (isset($params['file_end'. $i])) {
+                    $endImage = $params['file_end'. $i];
+                    $fileName2 = time() . $this->generateRandomString() . "." . $endImage->extension();
+                    $endImage->move(public_path($this->linkImages), $fileName2);
+                    $file2 = $endImage->getClientOriginalName();
+                }
+                if ($file1 || $file2) {
+                    ProductImage::insert([
+                        'product_id'=> $product->id,
+                        'file_1'=> $file1,
+                        'file_name_1'=> $fileName1,
+                        'file_2'=> $file2,
+                        'file_name_2'=> $fileName2,
+                    ]);
                 }
             }
+
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -177,16 +158,30 @@ class FloorPlanRepository extends BaseRepository {
         return $randomString;
     }
 
-    public function upload($params) {
-        if (isset($params['file'])) {
-            $file = $params['file'];
-            $name = time() . $this->generateRandomString() . "." . $file->extension();
-            $file->move(public_path("upload/admin/product/product_images"), $name);
-            ProductImage::insert([
-                'product_id'=> $params['product_id'],
-                'file'=> $file->getClientOriginalName(),
-                'file_name'=> $name
-            ]);
+    public function upload($request) {
+        if($request->hasFile('upload')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('upload')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+
+            //Upload File
+            $request->file('upload')->move(public_path($this->linkUploads), $filenametostore);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset($this->linkUploads . '/' . $filenametostore);
+            $msg = 'Image successfully uploaded';
+            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+            // Render HTML output
+            @header('Content-type: text/html; charset=utf-8');
+            echo $re;
         }
     }
 }

@@ -8,23 +8,6 @@
     </style>
 @endsection
 @section('main-content-inner')
-<!-- page title area start -->
-<div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
-    <div class="row align-items-center" style="padding: 1.6rem 0;">
-        <div class="col-md-6 col-sm-8">
-            <div class="search-box pull-left">
-                <form action="{{ route('products') }}" method="GET" >
-                    <input type="text" name="search" placeholder="Search..." value="{{ request()->input('search') }}">
-                    <i class="ti-search"></i>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-        <div class="col-sm-6 clearfix">
-
-        </div>
-    </div>
-</div>
 <!-- page title area end -->
 <div class="main-content-inner">
     <div class="row">
@@ -37,10 +20,10 @@
                             @if (session('delete-success'))
                                 <h5 class="product-message mb-2 text-success">{{ session('delete-success') }}</h5>
                             @endif
-                            <h4 class="header-title">List Products</h4>
+                            <h4 class="header-title">List Video Slideshow</h4>
                         </div>
                         <div>
-                            <a class="btn btn-primary" href="products/create">
+                            <a class="btn btn-primary" href="{{ route('video-slideshow-create') }}">
                                 <i class="ti-plus"></i><span>Add</span>
                             </a>
                         </div>
@@ -61,10 +44,10 @@
                                         <th scope="row">{{$product->name}}</th>
                                         <td>{{$product->description}}</td>
                                         <td>
-                                            <a href="{{ route('products-edit', ['id'=> $product->id]) }}">
+                                            <a href="{{ route('video-slideshow-edit', ['id'=> $product->id]) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="product-remove" href="{{ route('products-delete', ['id'=> $product->id]) }}"
+                                            <a class="product-remove" href="{{ route('video-slideshow-delete', ['id'=> $product->id]) }}"
                                                onclick="return confirm('Are you sure to delete product : {{ $product->name }} ?' )"
                                             >
                                                 <i class="ti-trash"></i>
@@ -86,4 +69,10 @@
         <!-- basic table end -->
     </div>
 </div>
+<script src="{{ asset('assets/admin/js/jquery341.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.product-message').delay(5000).fadeOut();
+    })
+</script>
 @endsection
