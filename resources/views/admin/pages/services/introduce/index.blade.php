@@ -60,11 +60,8 @@
                                         <th scope="row">{{$service->name}}</th>
                                         <td>{{$service->content}}</td>
                                         <td>
-                                            @if($service->serviceImages->count())
-                                                @foreach($service->serviceImages as $image)
-                                                    <img class="service-img" width="100px" height="80px" src="{{asset('upload/admin/services/introduce/' . $image->file_name)}}" alt="">
-                                                @endforeach
-                                            @endif
+                                            <img class="service-img" width="100px" height="80px"
+                                                 src="{{asset('upload/admin/services/introduce/' . $service->file_name)}}" alt="">
                                         </td>
                                         <td style="vertical-align: middle">
                                             <a href="{{ route('service-introduce-edit', ['id'=> $service->id]) }}">

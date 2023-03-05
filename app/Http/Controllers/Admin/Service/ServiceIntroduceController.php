@@ -29,7 +29,7 @@ class ServiceIntroduceController extends Controller
     }
 
     public function update(Request $request, $id) {
-        $this->repository->update($request->all(), $id);
+        $this->repository->update($request->only('name', 'content', 'file'), $id);
         return redirect()->back()->with('edit-success', 'Edit success !!!');
     }
 

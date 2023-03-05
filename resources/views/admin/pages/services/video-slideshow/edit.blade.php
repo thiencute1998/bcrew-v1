@@ -11,11 +11,11 @@
         }
         .product-videos {
             position: relative;
+            margin-left: 15px;
+            margin-right: 15px;
         }
-        .remove-video {
-            position: absolute;
-            right: 0;
-            top: 0;
+        .product-video {
+            width: 200px;
         }
     </style>
 
@@ -35,11 +35,18 @@
                                     @if (session('edit-success'))
                                         <h5 class="product-message mb-2 text-success">{{ session('edit-success') }}</h5>
                                     @endif
-                                    <h4 class="header-title product-add-title">Edit product</h4>
+                                    <h4 class="header-title product-add-title">Edit Video Slideshow</h4>
                                     <input type="hidden" id="product-id">
                                     <div class="form-group">
                                         <label for="product-name" class="col-form-label">Name</label>
                                         <input class="form-control" name="name" type="text" value="{{ $product->name }}" id="product-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="services" class="col-form-label">Status</label>
+                                        <select class="custom-select product-status" name="status" data-value="{{ $product->status }}">
+                                            <option value="1" >Active</option>
+                                            <option value="0">Nonactive</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="product-description" class="col-form-label">Description</label>
@@ -48,29 +55,50 @@
                                         </textarea>
                                     </div>
                                     <div class="videos-collection">
+                                        <input type="hidden" class="product-total-images" name="total_image" value="{{  $product->productVideos->count() ? $product->productVideos->count() : 1 }}">
                                         <label for="" class="col-form-label">Link videos</label>
                                         <div class="row">
                                             @if($product->productVideos->count())
-                                                @foreach($product->productVideos as $video)
-                                                    <div class="col-4 form-group product-videos">
-                                                        <input class="form-control" name="videos[]" type="text" value="{{$video->link}}">
-                                                        <button type="button" class="btn remove-video" title="Remove link video">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+                                                @foreach($product->productVideos as $key=> $video)
+                                                    <div class="form-group product-videos d-flex">
+                                                        <div>
+                                                            <input class="product-video form-control mb-2" name="videos{{$key + 1}}"
+                                                                   value="{{$video->link}}"
+                                                                   type="text" placeholder="Link video" required>
+                                                            <div class="mb-3 mr-2 image-item" style="position: relative">
+                                                                <input type="hidden" class="image-hidden" name="file_hidden{{$key + 1}}" value="{{ $video->file }}">
+                                                                <input type="hidden" class="image-hidden" name="file_name_hidden{{$key + 1}}" value="{{ $video->file_name }}">
+                                                                <input type="file" class="files-upload" name="files{{$key + 1}}">
+                                                                <img width="200px" height="150px" class="product-img" src="{{ asset('upload/admin/services/video_slideshow/'. $video->file_name) }}">
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin: auto;">
+                                                            <button type="button" class="btn remove-video" title="Remove link & image">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 @endforeach
                                             @else
-                                                <div class="col-4 form-group product-videos">
-                                                    <input class="form-control" name="videos[]" type="text">
-                                                    <button type="button" class="btn remove-video" title="Remove link video">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                                <div class="form-group product-videos d-flex">
+                                                    <div>
+                                                        <input class="product-video form-control mb-2" name="videos1" type="text" placeholder="Link video" required>
+                                                        <div class="mb-3 mr-2 image-item" style="position: relative">
+                                                            <input type="file" class="files-upload" name="files1" required>
+                                                            <img width="200px" height="150px" class="product-img">
+                                                        </div>
+                                                    </div>
+                                                    <div style="margin: auto;">
+                                                        <button type="button" class="btn remove-video" title="Remove link & image">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             @endif
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button type="button" class="btn add-videos" title="Add video">
+                                                <button type="button" class="btn add-videos" title="Add video & image">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
@@ -97,18 +125,51 @@
         $(document).ready(function(){
             $('.product-message').delay(5000).fadeOut();
 
+            let status = $('.product-status').data('value');
+            $('.product-status').val(status);
+
             $(document).on('click', '.add-videos', function() {
+                let totalImage = $('.product-total-images').val();
+                totalImage = Number(totalImage) + 1;
+                if (!totalImage) {
+                    totalImage = 1;
+                }
+                $('.product-total-images').val(totalImage);
+
                 $('.product-videos').last().after(
-                    '<div class="col-4 form-group product-videos">' +
-                    '<input class="form-control" name="videos[]" type="text">' +
-                    '<div class="dlmedium">'+
-                    '<button type="button" class="btn remove-video" title="Remove partner images">'+
-                    '<i class="fa fa-trash"></i>'+
-                    '</button>'+
-                    '</div>'+
+                    '<div class="form-group product-videos d-flex">' +
+                    '<div>' +
+                    '<input class="product-video form-control mb-2" name="videos' + totalImage + '"' +
+                    ' type="text" placeholder="Link video" required>' +
+                    '<div class="mb-3 mr-2 image-item" style="position: relative">' +
+                    '<input type="file" class="files-upload" name="files' + totalImage + '"' +
+                    ' required>' +
+                    '<img width="200px" height="150px" class="product-img">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div style="margin: auto;">' +
+                    '<button type="button" class="btn remove-video" title="Remove link & image">' +
+                    '<i class="fa fa-trash"></i>' +
+                    '</button>' +
+                    '</div>' +
                     '</div>'
                 )
             })
+
+            $(document).on('change', '.files-upload', function() {
+                let vm = this;
+                if (this.files && this.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(vm).next().attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+
+                // remove hidden input
+                $(this).closest('.image-item').find('.image-hidden').remove();
+
+            });
 
             $(document).on('click', '.remove-video', function() {
                 if ($('.remove-video')[1]) {

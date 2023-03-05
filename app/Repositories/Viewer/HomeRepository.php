@@ -15,7 +15,7 @@ class HomeRepository extends BaseRepository {
     public function index() {
         $query = $this->model->query();
         $slides = Slide::where('status', 1)->get();
-        $services = $query->with('serviceImages')->get();
+        $services = $query->orderBy('id','asc')->get();
         return view('viewer.pages.home', compact('services', 'slides'));
     }
 

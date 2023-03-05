@@ -46,53 +46,68 @@
                                             {{ $service->content }}
                                         </textarea>
                                     </div>
+{{--                                    <div class="images-collection">--}}
+{{--                                        <input type="hidden" class="product-total-images" name="total_image" value="{{  $service->serviceImages->count() ? $service->serviceImages->count() : 1 }}">--}}
+{{--                                        <label for="" class="col-form-label">Images</label>--}}
+{{--                                        <div class="form-group row">--}}
+{{--                                            @if($service->serviceImages->count())--}}
+{{--                                                @foreach($service->serviceImages as $key=> $image)--}}
+{{--                                                <div class="form-group product-images mr-3">--}}
+{{--                                                    <div class="d-flex">--}}
+{{--                                                        <div class="mb-3 mr-2 image-item" style="position: relative">--}}
+{{--                                                            <input type="hidden" class="image-hidden" name="file{{$key + 1}}" value="{{$image->file}}">--}}
+{{--                                                            <input type="hidden" class="image-hidden" name="file_name{{$key + 1}}" value="{{$image->file_name}}">--}}
+{{--                                                            <input type="file" class="files-upload" name="files{{$key + 1}}">--}}
+{{--                                                            <img width="150px" height="150px" class="product-img" src="{{ asset('upload/admin/services/introduce/'. $image->file_name) }}">--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="zoomimages" style="align-self: center;">--}}
+{{--                                                            <div class="dlmedium">--}}
+{{--                                                                <button type="button" class="btn remove-images" title="Remove image">--}}
+{{--                                                                    <i class="fa fa-trash"></i>--}}
+{{--                                                                </button>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                @endforeach--}}
+{{--                                            @else--}}
+{{--                                                <div class="form-group product-images mr-3">--}}
+{{--                                                    <div class="d-flex">--}}
+{{--                                                        <div class="mb-3 mr-2 image-item" style="position: relative">--}}
+{{--                                                            <input type="file" class="files-upload" name="files1">--}}
+{{--                                                            <img width="150px" height="150px" class="product-img">--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="zoomimages" style="align-self: center;">--}}
+{{--                                                            <div class="dlmedium">--}}
+{{--                                                                <button type="button" class="btn remove-images" title="Remove partner images">--}}
+{{--                                                                    <i class="fa fa-trash"></i>--}}
+{{--                                                                </button>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-12">--}}
+{{--                                                <button type="button" class="btn add-images" title="Add partner images">--}}
+{{--                                                    <i class="fa fa-plus"></i>--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+
                                     <div class="images-collection">
-                                        <input type="hidden" class="product-total-images" name="total_image" value="{{  $service->serviceImages->count() ? $service->serviceImages->count() : 1 }}">
-                                        <label for="" class="col-form-label">Images</label>
+                                        <label for="" class="col-form-label">Image (.gif)</label>
                                         <div class="form-group row">
-                                            @if($service->serviceImages->count())
-                                                @foreach($service->serviceImages as $key=> $image)
-                                                <div class="form-group product-images mr-3">
-                                                    <div class="d-flex">
-                                                        <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                            <input type="hidden" class="image-hidden" name="file{{$key + 1}}" value="{{$image->file}}">
-                                                            <input type="hidden" class="image-hidden" name="file_name{{$key + 1}}" value="{{$image->file_name}}">
-                                                            <input type="file" class="files-upload" name="files{{$key + 1}}">
-                                                            <img width="150px" height="150px" class="product-img" src="{{ asset('upload/admin/services/introduce/'. $image->file_name) }}">
-                                                        </div>
-                                                        <div class="zoomimages" style="align-self: center;">
-                                                            <div class="dlmedium">
-                                                                <button type="button" class="btn remove-images" title="Remove image">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                            <div class="form-group product-images mr-3">
+                                                <div class="d-flex">
+                                                    <div class="mb-3 mr-2 image-item" style="position: relative">
+                                                        <input type="file" class="files-upload" name="file">
+                                                        <img width="150px" height="150px" class="logo-img"
+                                                             src="{{asset('upload/admin/services/introduce/' . $service->file_name)}}">
                                                     </div>
                                                 </div>
-                                                @endforeach
-                                            @else
-                                                <div class="form-group product-images mr-3">
-                                                    <div class="d-flex">
-                                                        <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                            <input type="file" class="files-upload" name="files1">
-                                                            <img width="150px" height="150px" class="product-img">
-                                                        </div>
-                                                        <div class="zoomimages" style="align-self: center;">
-                                                            <div class="dlmedium">
-                                                                <button type="button" class="btn remove-images" title="Remove partner images">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <button type="button" class="btn add-images" title="Add partner images">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>

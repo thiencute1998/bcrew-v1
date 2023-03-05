@@ -23,11 +23,11 @@
 
     <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/index.css')}}' type='text/css' media='all' />
     <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/classic-themes.min.css?ver=1')}}' type='text/css' media='all' />
-    <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/styles.css?ver=5.5.6')}}' type='text/css' media='all' />
-    <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/flatsome.css?ver=3.15.4')}}' type='text/css' media='all' />
-    <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/flatsome-shop.css?ver=3.15.4')}}' type='text/css' media='all' />
-    <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/style.css?ver=3.0')}}' type='text/css' media='all' />
-    <link rel='stylesheet' id='flatsome-googlefonts-css' href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2C700%2Cregular%2C700%2Cregular&#038;display=swap&#038;ver=3.9' type='text/css' media='all' />
+    <link rel='stylesheet' id='contact-form-7-css' href='{{asset('assets/viewer/style/styles.css?ver=5.5.6')}}' type='text/css' media='all' />
+    <link rel='stylesheet' id='flatsome-main-css' href='{{asset('assets/viewer/style/flatsome.css?ver=3.15.4')}}' type='text/css' media='all' />
+    <link rel='stylesheet' id='flatsome-main-inline-css' href='{{asset('assets/viewer/style/flatsome-shop.css?ver=3.15.4')}}' type='text/css' media='all' />
+    <link rel='stylesheet' id='flatsome-shop-css' href='{{asset('assets/viewer/style/style.css?ver=3.0')}}' type='text/css' media='all' />
+    <link rel='stylesheet' id='flatsome-style-css' href='//fonts.googleapis.com/css?family=Roboto%3Aregular%2C700%2Cregular%2C700%2Cregular&#038;display=swap&#038;ver=3.9' type='text/css' media='all' />
     <script type="text/javascript">
         window._nslDOMReady = function (callback) {
             if ( document.readyState === "complete" || document.readyState === "interactive" ) {
@@ -55,13 +55,11 @@
     <main id="main" class="">
 
 
-        <div id="content" role="main" class="content-area">
 
 
            @yield('viewer-content')
 
 
-        </div>
 
 
 
@@ -175,7 +173,7 @@
     var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
     /* ]]> */
 </script>
-<script type='text/javascript' src='js/woocommerce.min.js?ver=6.4.1' id='woocommerce-js'></script>
+<script type='text/javascript' src='{{asset('assets/viewer/js/woocommerce.min.js')}}' id='woocommerce-js'></script>
 <script type='text/javascript' id='wc-cart-fragments-js-extra'>
     /* <![CDATA[ */
     var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_b52988832a8ba1963d39feb4091f8172","fragment_name":"wc_fragments_b52988832a8ba1963d39feb4091f8172","request_timeout":"5000"};
@@ -191,13 +189,13 @@
 </script>
 <script type='text/javascript' src='{{asset('assets/viewer/js/index.js?ver=5.5.6')}}' id='wpcf7-recaptcha-js'></script>
 <script type='text/javascript' src='{{asset('assets/viewer/js/hoverIntent.min.js')}}' id='hoverIntent-js'></script>
-<script type='text/javascript' id='flatsome-js-js-extra'>
+<script type='text/javascript' id='flatsome-js-extra'>
     /* <![CDATA[ */
     var flatsomeVars = {"theme":{"version":"3.15.4"},"ajaxurl":"https:\/\/specialediting.org\/wp-admin\/admin-ajax.php","rtl":"","sticky_height":"70","assets_url":"https:\/\/specialediting.org\/wp-content\/themes\/flatsome\/assets\/js\/","lightbox":{"close_markup":"<button title=\"%title%\" type=\"button\" class=\"mfp-close\"><svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-x\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"><\/line><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"><\/line><\/svg><\/button>","close_btn_inside":false},"user":{"can_edit_pages":false},"i18n":{"mainMenu":"Main Menu"},"options":{"cookie_notice_version":"1","swatches_layout":false,"swatches_box_select_event":false,"swatches_box_behavior_selected":false,"swatches_box_update_urls":"1","swatches_box_reset":false,"swatches_box_reset_extent":false,"swatches_box_reset_time":300,"search_result_latency":"0"},"is_mini_cart_reveal":"1"};
     /* ]]> */
 </script>
-<script type='text/javascript' src='{{asset('assets/viewer/js/flatsome.js')}}' id='flatsome-js-js'></script>
-<script type='text/javascript' src='{{asset('assets/viewer/js/woocommerce.js')}}' id='flatsome-theme-woocommerce-js-js'></script>
+<script type='text/javascript' src='{{asset('assets/viewer/js/flatsome.js')}}' id='flatsome-js'></script>
+<script type='text/javascript' src='{{asset('assets/viewer/js/woocommerce.js')}}' id='flatsome-theme-woocommerce-js'></script>
 <!--[if IE]>
 <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/intersection-observer-polyfill@0.1.0/dist/IntersectionObserver.js?ver=0.1.0' id='intersection-observer-polyfill-js'></script>
 <![endif]-->

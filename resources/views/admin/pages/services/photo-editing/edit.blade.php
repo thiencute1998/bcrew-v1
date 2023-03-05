@@ -41,6 +41,13 @@
                                         <input class="form-control" name="name" type="text" value="{{ $product->name }}" id="product-name" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="services" class="col-form-label">Status</label>
+                                        <select class="custom-select product-status" name="status" data-value="{{ $product->status }}">
+                                            <option value="1" >Active</option>
+                                            <option value="0">Nonactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="product-description" class="col-form-label">Description</label>
                                         <textarea class="form-control" name="description" type="text" id="description" required >
                                             {{ $product->description }}
@@ -126,6 +133,9 @@
 
         $(document).ready(function(){
             $('.product-message').delay(5000).fadeOut();
+
+            let status = $('.product-status').data('value');
+            $('.product-status').val(status);
 
             $('#product-form').on('click', '.add-images', function() {
                 let totalImage = $('.product-total-images').val();

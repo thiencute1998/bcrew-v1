@@ -11,6 +11,7 @@ define('VIDEO_SLIDESHOW', 4);
 
 class VideoSlideShowRepository extends BaseRepository {
 
+    private $linkImages = "upload/admin/services/video_slideshow";
     private $linkUploads = "upload/admin/services/ckeditor";
 
     public function model()
@@ -36,6 +37,10 @@ class VideoSlideShowRepository extends BaseRepository {
     public function store($params) {
         DB::beginTransaction();
         try {
+            if ($params['status'] == 1) {
+                $this->model->where('service_id', VIDEO_SLIDESHOW)
+                    ->where('status', 1)->update(['status'=> 0]);
+            }
             $product = new $this->model;
             $product->service_id = VIDEO_SLIDESHOW;
             $product->fill($params);
@@ -43,10 +48,21 @@ class VideoSlideShowRepository extends BaseRepository {
 
             if (isset($params['videos'])) {
                 $videos = $params['videos'];
-                foreach ($videos as $video) {
+                foreach ($videos as $key=> $video) {
+                    $file = null;
+                    $fileName = null;
+
+                    if (isset($params['files'][$key])) {
+                        $file = $params['files'][$key];
+                        $fileName = time() . $this->generateRandomString() . "." . $file->extension();
+                        $file->move(public_path($this->linkImages), $fileName);
+                        $file = $file->getClientOriginalName();
+                    }
                     $arr[] = [
                         'product_id'=> $product->id,
-                        'link'=> $video
+                        'link'=> $video,
+                        'file'=> $file,
+                        'file_name'=> $fileName
                     ];
                 }
                 ProductVideo::insert($arr);
@@ -62,31 +78,50 @@ class VideoSlideShowRepository extends BaseRepository {
     public function edit($id) {
         $query = Product::query();
         $query->where('id', $id);
-        return $query->with('productImages')->first();
+        return $query->with('productVideos')->first();
     }
 
     public function update($params, $id) {
         $product = $this->model->findOrFail($id);
         DB::beginTransaction();
         try {
+            if ($params['status'] == 1) {
+                $this->model->where('status', 1)->where('service_id', VIDEO_SLIDESHOW)
+                    ->where('id', '!=', $id)->update(['status'=> 0]);
+            }
             $product->fill($params);
             $product->service_id = VIDEO_SLIDESHOW;
             $product->save();
             ProductVideo::where('product_id', $id)->delete();
-
-            if (isset($params['videos'])) {
-                $arr = [];
-                $videos = $params['videos'];
-                foreach ($videos as $video) {
-                    if ($video) {
-                        $arr[] = [
-                            'product_id'=> $product->id,
-                            'link'=> $video
-                        ];
-                    }
+            $total = $params['total_image'];
+            $arr = [];
+            for($i = 1; $i <= $total; $i++) {
+                $file = null;
+                $link = null;
+                $fileName = null;
+                if (isset($params['file_hidden'. $i])) {
+                    $file = $params['file_hidden'. $i];
+                    $fileName = $params['file_name_hidden'. $i];
                 }
-                ProductVideo::insert($arr);
+                if (isset($params['files'. $i])) {
+                    $image = $params['files'. $i];
+                    $fileName = time() . $this->generateRandomString() . "." . $image->extension();
+                    $image->move(public_path($this->linkImages), $fileName);
+                    $file = $image->getClientOriginalName();
+                }
+                if (isset($params['videos'. $i])) {
+                    $link = $params['videos'. $i];
+                }
+                if ($file || $fileName || $link) {
+                    $arr[] = [
+                        'product_id'=> $product->id,
+                        'link'=> $link,
+                        'file'=> $file,
+                        'file_name'=> $fileName
+                    ];
+                }
             }
+            ProductVideo::insert($arr);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();

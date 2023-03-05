@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'products';
-    protected $fillable = ['name', 'service_id', 'description'];
+    protected $fillable = ['name', 'slug', 'service_id', 'description', 'status'];
 
     public $timestamps = true;
 

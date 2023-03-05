@@ -11,7 +11,7 @@ class ProductVideo extends Model
 
     protected $table = 'product_videos';
 
-    protected $fillable = ['product_id', 'link'];
+    protected $fillable = ['product_id', 'link', 'file', 'file_name'];
 
     public $timestamps = false;
 }

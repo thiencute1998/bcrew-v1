@@ -9,7 +9,7 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'content'];
+    protected $fillable = ['name', 'content','file', 'file_name'];
 
     public function serviceImages() {
         return $this->hasMany(ServiceImage::class, 'service_id', 'id');

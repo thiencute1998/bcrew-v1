@@ -6,8 +6,9 @@
                 <!-- Logo -->
                 <div id="logo" class="flex-col logo">
                     <!-- Header logo -->
-                    <a href="https://specialediting.org/" title="Special Editing" rel="home">
-                        <img width="375" height="158" src="https://specialediting.org/wp-content/uploads/2022/05/logo.png" class="header_logo header-logo" alt="Special Editing"/><img  width="375" height="158" src="https://specialediting.org/wp-content/uploads/2022/05/logo.png" class="header-logo-dark" alt="Special Editing"/></a>
+                    <a href="{{route('index')}}" title="{{$logoWeb ? $logoWeb->name : ""}}" rel="home">
+                        <img width="375" height="158" src="{{"upload/admin/banner/logo/". ($logoWeb ? $logoWeb->file_name : "")}}" class="header_logo header-logo" alt="{{$logoWeb ? $logoWeb->name : ""}}"/>
+                        <img  width="375" height="158" src="{{"upload/admin/banner/logo/". ($logoWeb ? $logoWeb->file_name : "")}}" class="header-logo-dark" alt="{{$logoWeb ? $logoWeb->name : ""}}"/></a>
                 </div>
 
                 <!-- Mobile Left Elements -->
@@ -26,17 +27,16 @@
                 <!-- Right Elements -->
                 <div class="flex-col hide-for-medium flex-right">
                     <ul class="header-nav header-nav-main nav nav-right  nav-uppercase">
-                        <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-99 current_page_item menu-item-427 active menu-item-design-default"><a href="https://specialediting.org/" aria-current="page" class="nav-top-link">Home</a></li>
+                        <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-99 current_page_item menu-item-427 active menu-item-design-default"><a href="{{route('index')}}" aria-current="page" class="nav-top-link">Home</a></li>
                         <li id="menu-item-293" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293 menu-item-design-default has-dropdown"><a href="https://specialediting.org/services/" class="nav-top-link">SERVICES<i class="icon-angle-down" ></i></a>
                             <ul class="sub-menu nav-dropdown nav-dropdown-default">
-                                <li id="menu-item-434" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-434"><a href="https://specialediting.org/photo-editing/">PHOTO EDITING</a></li>
-                                <li id="menu-item-609" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-609"><a href="https://specialediting.org/virtual-staging/">VIRTUAL STAGING</a></li>
-                                <li id="menu-item-605" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-605"><a href="https://specialediting.org/floor-plans/">FLOOR PLAN</a></li>
-                                <li id="menu-item-607" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-607"><a href="https://specialediting.org/video-slideshow/">VIDEO SLIDESHOW</a></li>
+                                @foreach($menuServices as $menu)
+                                    <li id="menu-item-434" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-434"><a href="{{route($menu->link)}}">{{strtoupper($menu->name)}}</a></li>
+                                @endforeach
                             </ul>
                         </li>
-                        <li id="menu-item-291" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-291 menu-item-design-default"><a href="https://specialediting.org/contact-us/" class="nav-top-link">HOW TO WORKS</a></li>
-                        <li id="menu-item-292" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-292 menu-item-design-default"><a href="https://specialediting.org/how-to-works/" class="nav-top-link">CONTACT US</a></li>
+                        <li id="menu-item-291" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-291 menu-item-design-default"><a href="{{route('how_to_work')}}" class="nav-top-link">HOW TO WORKS</a></li>
+                        <li id="menu-item-292" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-292 menu-item-design-default"><a href="{{route('contact_us')}}" class="nav-top-link">CONTACT US</a></li>
                     </ul>
                 </div>
 

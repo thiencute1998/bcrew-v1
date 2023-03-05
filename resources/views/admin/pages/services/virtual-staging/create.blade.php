@@ -34,11 +34,18 @@
                                     @if (session('add-success'))
                                         <h5 class="product-message mb-2 text-success">{{ session('add-success') }}</h5>
                                     @endif
-                                    <h4 class="header-title product-add-title">Add product</h4>
+                                    <h4 class="header-title product-add-title">Add Virtual Staging</h4>
                                     <input type="hidden" id="product-id">
                                     <div class="form-group">
                                         <label for="product-name" class="col-form-label">Name</label>
                                         <input class="form-control" name="name" type="text" value="{{ old('name') }}" id="product-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="services" class="col-form-label">Status</label>
+                                        <select class="custom-select" name="status">
+                                            <option value="1" selected>Active</option>
+                                            <option value="0">Nonactive</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="product-description" class="col-form-label">Description</label>

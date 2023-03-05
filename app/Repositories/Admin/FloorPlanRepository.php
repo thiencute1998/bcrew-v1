@@ -7,6 +7,7 @@ use App\Models\Admin\ProductVideo;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 define('FLOOR_PLAN', 3);
 class FloorPlanRepository extends BaseRepository {
@@ -29,7 +30,13 @@ class FloorPlanRepository extends BaseRepository {
         $products = $query->paginate(10);
         return view('admin.pages.services.floor-plan.index', compact('products'));
     }
-
+    public function checkSlug($name, $slug) {
+        $count = $this->model->where('name', $name)->count();
+        if ($count) {
+            $slug .= "-" . $count;
+        }
+        return $slug;
+    }
     /**
      * @throws \Exception
      */
@@ -38,6 +45,7 @@ class FloorPlanRepository extends BaseRepository {
         try {
             $product = new $this->model;
             $product->service_id = FLOOR_PLAN;
+            $product->slug = $this->checkSlug($params['name'], Str::slug($params['name']));
             $product->fill($params);
             $product->save();
 
@@ -87,7 +95,7 @@ class FloorPlanRepository extends BaseRepository {
         $product = $this->model->findOrFail($id);
         DB::beginTransaction();
         try {
-            $product->fill($params);
+            $product->slug = $this->checkSlug($params['name'], Str::slug($params['name']));
             $product->fill($params);
             $product->save();
             ProductImage::where('product_id', $id)->delete();

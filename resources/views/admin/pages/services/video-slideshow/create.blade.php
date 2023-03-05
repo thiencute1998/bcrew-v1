@@ -11,11 +11,11 @@
         }
         .product-videos {
             position: relative;
+            margin-left: 15px;
+            margin-right: 15px;
         }
-        .remove-video {
-            position: absolute;
-            right: 0;
-            top: 0;
+        .product-video {
+            width: 200px;
         }
     </style>
 
@@ -35,11 +35,18 @@
                                     @if (session('add-success'))
                                         <h5 class="product-message mb-2 text-success">{{ session('add-success') }}</h5>
                                     @endif
-                                    <h4 class="header-title product-add-title">Add product</h4>
+                                    <h4 class="header-title product-add-title">Add Video Slideshow</h4>
                                     <input type="hidden" id="product-id">
                                     <div class="form-group">
                                         <label for="product-name" class="col-form-label">Name</label>
                                         <input class="form-control" name="name" type="text" value="{{ old('name') }}" id="product-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="services" class="col-form-label">Status</label>
+                                        <select class="custom-select" name="status">
+                                            <option value="1" selected>Active</option>
+                                            <option value="0">Nonactive</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="product-description" class="col-form-label">Description</label>
@@ -47,18 +54,26 @@
                                         </textarea>
                                     </div>
                                     <div class="videos-collection">
-                                        <label for="" class="col-form-label">Link videos</label>
+                                        <label for="" class="col-form-label">Link videos & image</label>
                                         <div class="row">
-                                            <div class="col-4 form-group product-videos">
-                                                <input class="form-control" name="videos[]" type="text">
-                                                <button type="button" class="btn remove-video" title="Remove link video">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
+                                            <div class="form-group product-videos d-flex">
+                                                <div>
+                                                    <input class="product-video form-control mb-2" name="videos[]" type="text" placeholder="Link video" required>
+                                                    <div class="mb-3 mr-2 image-item" style="position: relative">
+                                                        <input type="file" class="files-upload" name="files[]" required>
+                                                        <img width="200px" height="150px" class="product-img">
+                                                    </div>
+                                                </div>
+                                                <div style="margin: auto;">
+                                                    <button type="button" class="btn remove-video" title="Remove link & image">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button type="button" class="btn add-videos" title="Add video">
+                                                <button type="button" class="btn add-videos" title="Add video & image">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
@@ -87,16 +102,33 @@
 
             $(document).on('click', '.add-videos', function() {
                 $('.product-videos').last().after(
-                    '<div class="col-4 form-group product-videos">' +
-                    '<input class="form-control" name="videos[]" type="text">' +
-                    '<div class="dlmedium">'+
-                        '<button type="button" class="btn remove-video" title="Remove link video">'+
-                            '<i class="fa fa-trash"></i>'+
-                            '</button>'+
-                        '</div>'+
+                    '<div class="form-group product-videos d-flex">' +
+                    '<div>' +
+                    '<input class="product-video form-control mb-2" name="videos[]" type="text" placeholder="Link video" required>' +
+                    '<div class="mb-3 mr-2 image-item" style="position: relative">' +
+                    '<input type="file" class="files-upload" name="files[]" required>' +
+                    '<img width="200px" height="150px" class="product-img">' +
+                    '</div>' +
+                    '</div>' +
+                    '<div style="margin: auto;">' +
+                    '<button type="button" class="btn remove-video" title="Remove link & image">' +
+                    '<i class="fa fa-trash"></i>' +
+                    '</button>' +
+                    '</div>' +
                     '</div>'
                 )
             })
+
+            $(document).on('change', '.files-upload', function() {
+                let vm = this;
+                if (this.files && this.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $(vm).next().attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
 
             $(document).on('click', '.remove-video', function() {
                 $(this).closest('.product-videos').remove()

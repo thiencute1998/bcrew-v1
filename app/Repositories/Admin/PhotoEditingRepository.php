@@ -6,6 +6,8 @@ use App\Models\Admin\ProductImage;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 define('PHOTO_EDITING', 1);
 class PhotoEditingRepository extends BaseRepository {
@@ -33,11 +35,20 @@ class PhotoEditingRepository extends BaseRepository {
     /**
      * @throws \Exception
      */
+
+    public function checkSlug($name, $slug) {
+        $count = $this->model->where('name', $name)->count();
+        if ($count) {
+            $slug .= "-" . $count;
+        }
+        return $slug;
+    }
     public function store($params) {
         DB::beginTransaction();
         try {
             $product = new $this->model;
             $product->service_id = PHOTO_EDITING;
+            $product->slug = $this->checkSlug($params['name'], Str::slug($params['name']));
             $product->fill($params);
             $product->save();
             $total = $params['total_image'];
@@ -86,8 +97,8 @@ class PhotoEditingRepository extends BaseRepository {
         $product = $this->model->findOrFail($id);
         DB::beginTransaction();
         try {
+            $product->slug = $this->checkSlug($params['name'], Str::slug($params['name']));
             $product->fill($params);
-            $product->service_id = PHOTO_EDITING;
             $product->save();
             ProductImage::where('product_id', $id)->delete();
             $total = $params['total_image'];

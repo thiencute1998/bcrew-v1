@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Config;
+use App\Models\Logo;
+use App\Models\Service;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -30,7 +33,16 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         View::composer('*', function ($view) {
             $user = auth()->user();
-            $view->with('userLogin', $user);
+            $logo = Logo::where('status', 1)->first();
+            $services = Service::all();
+            $config = Config::first();
+            $data = [
+                'userLogin'=> $user,
+                'logoWeb' => $logo ? $logo : "",
+                'menuServices'=> $services,
+                'config'=> $config
+            ];
+            $view->with($data);
         });
     }
 }

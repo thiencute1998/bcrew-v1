@@ -41,8 +41,15 @@
                                         <input class="form-control" name="name" type="text" value="{{ old('name') }}" id="product-name" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="services" class="col-form-label">Status</label>
+                                        <select class="custom-select" name="status">
+                                            <option value="1" selected>Active</option>
+                                            <option value="0">Nonactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="product-description" class="col-form-label">Description</label>
-                                        <textarea class="form-control" name="description" type="text" id="description" required >
+                                        <textarea class="form-control" name="description" type="text" id="description">
                                         </textarea>
                                     </div>
                                     <div class="images-collection">

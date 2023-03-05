@@ -34,11 +34,18 @@
                                     @if (session('edit-success'))
                                         <h5 class="product-message mb-2 text-success">{{ session('edit-success') }}</h5>
                                     @endif
-                                    <h4 class="header-title product-add-title">Edit product</h4>
+                                    <h4 class="header-title product-add-title">Edit Floor Plan</h4>
                                     <input type="hidden" id="product-id">
                                     <div class="form-group">
                                         <label for="product-name" class="col-form-label">Name</label>
                                         <input class="form-control" name="name" type="text" value="{{ $product->name }}" id="product-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="services" class="col-form-label">Status</label>
+                                        <select class="custom-select product-status" name="status" data-value="{{ $product->status }}">
+                                            <option value="1" >Active</option>
+                                            <option value="0">Nonactive</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="product-description" class="col-form-label">Description</label>
@@ -126,6 +133,9 @@
 
         $(document).ready(function(){
             $('.product-message').delay(5000).fadeOut();
+
+            let status = $('.product-status').data('value');
+            $('.product-status').val(status);
 
             $('#product-form').on('click', '.add-images', function() {
                 let totalImage = $('.product-total-images').val();

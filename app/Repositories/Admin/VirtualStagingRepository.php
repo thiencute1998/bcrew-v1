@@ -6,6 +6,7 @@ use App\Models\Admin\ProductImage;
 use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 define('VIRTUAL_STAGING', 2);
 class VirtualStagingRepository extends BaseRepository {
@@ -29,6 +30,14 @@ class VirtualStagingRepository extends BaseRepository {
         return view('admin.pages.services.virtual-staging.index', compact('products'));
     }
 
+    public function checkSlug($name, $slug) {
+        $count = $this->model->where('name', $name)->count();
+        if ($count) {
+            $slug .= "-" . $count;
+        }
+        return $slug;
+    }
+
     /**
      * @throws \Exception
      */
@@ -37,6 +46,7 @@ class VirtualStagingRepository extends BaseRepository {
         try {
             $product = new $this->model;
             $product->service_id = VIRTUAL_STAGING;
+            $product->slug = $this->checkSlug($params['name'], Str::slug($params['name']));
             $product->fill($params);
             $product->save();
 
@@ -86,8 +96,8 @@ class VirtualStagingRepository extends BaseRepository {
         $product = $this->model->findOrFail($id);
         DB::beginTransaction();
         try {
+            $product->slug = $this->checkSlug($params['name'], Str::slug($params['name']));
             $product->fill($params);
-            $product->service_id = VIRTUAL_STAGING;
             $product->save();
             ProductImage::where('product_id', $id)->delete();
 

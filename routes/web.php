@@ -17,6 +17,12 @@ use App\Http\Controllers\Admin\HowToWorkController;
 use App\Http\Controllers\Admin\Service\ServiceIntroduceController;
 
 use App\Http\Controllers\Viewer\HomeController;
+use App\Http\Controllers\PhotoEditingViewerController;
+use App\Http\Controllers\VirtualStagingViewerController;
+use App\Http\Controllers\FloorPlanViewerController;
+use App\Http\Controllers\VideoSlideShowViewerController;
+use App\Http\Controllers\Viewer\ContactUsController;
+use App\Http\Controllers\Viewer\HowToWorkController as HowToWorkViewerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -169,20 +175,30 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
     });
 });
 
-Route::get('/', function() {
-    return view('viewer.pages.home');
-});
-
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-//Route::get('insert', function() {
-//    for ($i = 1; $i <= 100; $i++) {
-//        \App\Models\Product::create([
-//            'name'=> 'Pruduct' . $i,
-//            'quantity'=> $i,
-//            'image'=> 'hihi.png',
-//            'description'=> 'Hahahas'
-//        ]);
-//    }
-//    return 1;
-//});
+Route::prefix('photo-editing')->group(function () {
+    Route::get('/', [PhotoEditingViewerController::class, 'index'])->name('photo_editing');
+    Route::get('/{slug}', [PhotoEditingViewerController::class, 'find'])->name('photo_editing_slug');
+});
+
+Route::prefix('virtual-staging')->group(function () {
+    Route::get('/', [VirtualStagingViewerController::class, 'index'])->name('virtual_staging');
+    Route::get('/{slug}', [VirtualStagingViewerController::class, 'find'])->name('virtual_staging_slug');
+});
+
+Route::prefix('floor-plan')->group(function () {
+    Route::get('/', [FloorPlanViewerController::class, 'index'])->name('floor_plan');
+    Route::get('/{slug}', [FloorPlanViewerController::class, 'find'])->name('floor_plan_slug');
+});
+
+Route::prefix('video-slideshow')->group(function () {
+    Route::get('/', [VideoSlideShowViewerController::class, 'index'])->name('video_slideshow');
+});
+
+Route::prefix('contact-us')->group(function () {
+    Route::get('/', [ContactUsController::class, 'index'])->name('contact_us');
+    Route::post('/send-mail', [ContactUsController::class, 'sendMail'])->name('contact_us_send_mail');
+});
+Route::get('/how-to-work', [HowToWorkViewerController::class, 'index'])->name('how_to_work');
+
