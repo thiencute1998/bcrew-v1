@@ -34,7 +34,6 @@
                                 <thead class="text-uppercase">
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
                                     <th>Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -42,8 +41,7 @@
                                 <tbody>
                                 @foreach($products as $product)
                                     <tr>
-                                        <th scope="row">{{$product->name}}</th>
-                                        <td>{{$product->description}}</td>
+                                        <td style="vertical-align: middle">{{$product->name}}</th>
                                         <td style="vertical-align: middle;">
                                             @if($product->status)
                                                 <span class="text-success">Active</span>

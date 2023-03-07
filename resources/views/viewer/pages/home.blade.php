@@ -158,9 +158,9 @@
                             <div class="icon">
                                 <div class="icon-inner">
                                     <img width="105" height="105"
-                                         src="https://specialediting.org/wp-content/uploads/2022/05/WORLD.png"
+                                         src="{{asset('assets/viewer/style/images/WORLD.png')}}"
                                          class="attachment-medium size-medium" alt="" decoding="async" loading="lazy"
-                                         srcset="https://specialediting.org/wp-content/uploads/2022/05/WORLD.png 105w, https://specialediting.org/wp-content/uploads/2022/05/WORLD-100x100.png 100w"
+                                         srcset="{{asset('assets/viewer/style/images/WORLD.png')}} 105w, {{asset('assets/viewer/style/images/WORLD-100x100.png')}} 100w"
                                          sizes="(max-width: 105px) 100vw, 105px"/></div>
                             </div>
                         </div>
@@ -186,9 +186,9 @@
                             <div class="icon">
                                 <div class="icon-inner">
                                     <img width="105" height="105"
-                                         src="https://specialediting.org/wp-content/uploads/2022/05/pngegg.png"
+                                         src="{{asset('assets/viewer/style/images/pngegg.png')}}"
                                          class="attachment-medium size-medium" alt="" decoding="async" loading="lazy"
-                                         srcset="https://specialediting.org/wp-content/uploads/2022/05/pngegg.png 105w, https://specialediting.org/wp-content/uploads/2022/05/pngegg-100x100.png 100w"
+                                         srcset="{{asset('assets/viewer/style/images/pngegg.png')}} 105w, {{asset('assets/viewer/style/images/pngegg-100x100.png')}} 100w"
                                          sizes="(max-width: 105px) 100vw, 105px"/></div>
                             </div>
                         </div>
@@ -214,9 +214,9 @@
                             <div class="icon">
                                 <div class="icon-inner">
                                     <img width="105" height="105"
-                                         src="https://specialediting.org/wp-content/uploads/2022/05/quality.png"
+                                         src="{{asset('assets/viewer/style/images/quality.png')}}"
                                          class="attachment-medium size-medium" alt="" decoding="async" loading="lazy"
-                                         srcset="https://specialediting.org/wp-content/uploads/2022/05/quality.png 105w, https://specialediting.org/wp-content/uploads/2022/05/quality-100x100.png 100w"
+                                         srcset="{{asset('assets/viewer/style/images/quality.png')}} 105w, {{asset('assets/viewer/style/images/quality-100x100.png')}} 100w"
                                          sizes="(max-width: 105px) 100vw, 105px"/></div>
                             </div>
                         </div>
@@ -242,9 +242,9 @@
                             <div class="icon">
                                 <div class="icon-inner">
                                     <img width="105" height="105"
-                                         src="https://specialediting.org/wp-content/uploads/2022/05/currency.png"
+                                         src="{{asset('assets/viewer/style/images/currency.png')}}"
                                          class="attachment-medium size-medium" alt="" decoding="async" loading="lazy"
-                                         srcset="https://specialediting.org/wp-content/uploads/2022/05/currency.png 105w, https://specialediting.org/wp-content/uploads/2022/05/currency-100x100.png 100w"
+                                         srcset="{{asset('assets/viewer/style/images/currency.png')}} 105w, {{asset('assets/viewer/style/images/currency.png')}} 100w"
                                          sizes="(max-width: 105px) 100vw, 105px"/></div>
                             </div>
                         </div>
@@ -346,10 +346,10 @@
                                     <div class="icon">
                                         <div class="icon-inner">
                                             <img width="105" height="105"
-                                                 src="https://specialediting.org/wp-content/uploads/2022/05/up.png"
+                                                 src="{{asset('assets/viewer/style/images/up.png')}}"
                                                  class="attachment-medium size-medium" alt="" decoding="async"
                                                  loading="lazy"
-                                                 srcset="https://specialediting.org/wp-content/uploads/2022/05/up.png 105w, https://specialediting.org/wp-content/uploads/2022/05/up-100x100.png 100w"
+                                                 srcset="{{asset('assets/viewer/style/images/up.png')}} 105w, {{asset('assets/viewer/style/images/up-100x100.png')}} 100w"
                                                  sizes="(max-width: 105px) 100vw, 105px"/></div>
                                     </div>
                                 </div>
@@ -379,10 +379,10 @@
                                     <div class="icon">
                                         <div class="icon-inner">
                                             <img width="105" height="105"
-                                                 src="https://specialediting.org/wp-content/uploads/2022/05/INSTRUCTIONS.png"
+                                                 src="{{asset('assets/viewer/style/images/INSTRUCTIONS.png')}}"
                                                  class="attachment-medium size-medium" alt="" decoding="async"
                                                  loading="lazy"
-                                                 srcset="https://specialediting.org/wp-content/uploads/2022/05/INSTRUCTIONS.png 105w, https://specialediting.org/wp-content/uploads/2022/05/INSTRUCTIONS-100x100.png 100w"
+                                                 srcset="{{asset('assets/viewer/style/images/INSTRUCTIONS.png')}} 105w, {{asset('assets/viewer/style/images/INSTRUCTIONS-100x100.png')}} 100w"
                                                  sizes="(max-width: 105px) 100vw, 105px"/></div>
                                     </div>
                                 </div>
@@ -412,10 +412,10 @@
                                     <div class="icon">
                                         <div class="icon-inner">
                                             <img width="105" height="105"
-                                                 src="https://specialediting.org/wp-content/uploads/2022/05/pngegg.png"
+                                                 src="{{asset('assets/viewer/style/images/time.png')}}"
                                                  class="attachment-medium size-medium" alt="" decoding="async"
                                                  loading="lazy"
-                                                 srcset="https://specialediting.org/wp-content/uploads/2022/05/pngegg.png 105w, https://specialediting.org/wp-content/uploads/2022/05/pngegg-100x100.png 100w"
+                                                 srcset="{{asset('assets/viewer/style/images/time.png')}} 105w, {{asset('assets/viewer/style/images/time-100x100.png')}} 100w"
                                                  sizes="(max-width: 105px) 100vw, 105px"/></div>
                                     </div>
                                 </div>
@@ -445,10 +445,10 @@
                                     <div class="icon">
                                         <div class="icon-inner">
                                             <img width="105" height="105"
-                                                 src="https://specialediting.org/wp-content/uploads/2022/05/down.png"
+                                                 src="{{asset('assets/viewer/style/images/down.png')}}"
                                                  class="attachment-medium size-medium" alt="" decoding="async"
                                                  loading="lazy"
-                                                 srcset="https://specialediting.org/wp-content/uploads/2022/05/down.png 105w, https://specialediting.org/wp-content/uploads/2022/05/down-100x100.png 100w"
+                                                 srcset="{{asset('assets/viewer/style/images/down.png')}} 105w, {{asset('assets/viewer/style/images/down-100x100.png')}} 100w"
                                                  sizes="(max-width: 105px) 100vw, 105px"/></div>
                                     </div>
                                 </div>

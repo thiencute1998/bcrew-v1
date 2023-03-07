@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Home - Special Editing</title>
-    <meta name="description" content="CLICK AN IMAGE TO SEE THE DIFFERENCE BETWEEN PACKAGES."/>
+    <title>{{$config->name}}</title>
+    <meta name="description" content="{{$config->description}}"/>
     <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
     <link rel="canonical" href="https://photomix.vn/" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Home - Special Editing" />
-    <meta property="og:description" content="CLICK AN IMAGE TO SEE THE DIFFERENCE BETWEEN PACKAGES." />
+    <meta property="og:title" content="{{$config->name}}" />
+    <meta property="og:description" content="{{$config->description}}" />
     <meta property="og:url" content="https://photomix.vn/" />
-    <meta property="og:site_name" content="Special Editing" />
-    <meta property="og:updated_time" content="2022-05-26T21:28:58+07:00" />
-    <meta property="og:image" content="https://photomix.vn/anhquangcao.jpg" />
-    <meta property="og:image:secure_url" content="https://photomix.vn/anhquangcao.jpg" />
+    <meta property="og:site_name" content="{{$config->name}}" />
+{{--    <meta property="og:image" content="https://photomix.vn/anhquangcao.jpg" />--}}
+{{--    <meta property="og:image:secure_url" content="https://photomix.vn/anhquangcao.jpg" />--}}
     <meta property="og:image:width" content="400" />
     <meta property="og:image:height" content="260" />
     <meta property="og:image:alt" content="Home" />
@@ -76,17 +75,16 @@
 
 
         <ul class="nav nav-sidebar nav-vertical nav-uppercase" data-tab="1">
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-99 current_page_item menu-item-427"><a href="https://specialediting.org/" aria-current="page">Home</a></li>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293"><a href="https://specialediting.org/services/">SERVICES</a>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-99 current_page_item menu-item-427"><a href="{{route('index')}}" aria-current="page">Home</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293"><a href="{{route('photo_editing')}}">SERVICES</a>
                 <ul class="sub-menu nav-sidebar-ul children">
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-434"><a href="https://specialediting.org/photo-editing/">PHOTO EDITING</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-609"><a href="https://specialediting.org/virtual-staging/">VIRTUAL STAGING</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-605"><a href="https://specialediting.org/floor-plans/">FLOOR PLAN</a></li>
-                    <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-607"><a href="https://specialediting.org/video-slideshow/">VIDEO SLIDESHOW</a></li>
+                    @foreach($menuServices as $menu)
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-434"><a href="{{route($menu->link)}}">{{strtoupper($menu->name)}}</a></li>
+                    @endforeach
                 </ul>
             </li>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-291"><a href="https://specialediting.org/contact-us/">HOW TO WORKS</a></li>
-            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-292"><a href="https://specialediting.org/how-to-works/">CONTACT US</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-291"><a href="{{route('how_to_work')}}">HOW TO WORKS</a></li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-292"><a href="{{route('contact_us')}}">CONTACT US</a></li>
         </ul>
 
 
@@ -103,45 +101,6 @@
     }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-customerchat" attribution="wordpress" attribution_version="2.3" page_id="102511092183189"></div>
 
-<div id="login-form-popup" class="lightbox-content mfp-hide">
-    <div class="woocommerce-notices-wrapper"></div>
-    <div class="account-container lightbox-inner">
-
-
-        <div class="account-login-inner">
-
-            <h3 class="uppercase">Đăng nhập</h3>
-
-            <form class="woocommerce-form woocommerce-form-login login" method="post">
-
-
-                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <label for="username">Tên tài khoản hoặc địa chỉ email&nbsp;<span class="required">*</span></label>
-                    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="" />					</p>
-                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <label for="password">Mật khẩu&nbsp;<span class="required">*</span></label>
-                    <input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
-                </p>
-
-
-                <p class="form-row">
-                    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
-                        <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span>Ghi nhớ mật khẩu</span>
-                    </label>
-                    <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="b165666b6e" /><input type="hidden" name="_wp_http_referer" value="/" />						<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="Đăng nhập">Đăng nhập</button>
-                </p>
-                <p class="woocommerce-LostPassword lost_password">
-                    <a href="https://specialediting.org/my-account/lost-password/">Quên mật khẩu?</a>
-                </p>
-
-
-            </form>
-        </div>
-
-
-    </div>
-
-</div>
 <script type="text/javascript">
     (function () {
         var c = document.body.className;

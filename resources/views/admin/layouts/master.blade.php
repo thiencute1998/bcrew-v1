@@ -39,12 +39,6 @@
         <div class="main-content">
             @include('admin.layouts.header')
 
-            <div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <div class="mb-0 ml-1">
-                    Filter with
-                </div>
-            </div>
-
             @yield('main-content-inner')
         </div>
     </div>

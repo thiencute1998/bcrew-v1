@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="admin"><img src="assets/images/icon/logo.png" alt="logo"></a>
+            <h4><a href="{{route('admin-index')}}" class="text-white">Admin</a></h4>
         </div>
     </div>
     <div class="main-menu">
@@ -15,7 +15,7 @@
                     <li>
                         <a href="admin/services" aria-expanded="true"><i class="ti-dashboard"></i><span>Services</span></a>
                         <ul class="collapse">
-                            <li class="active"><a href="{{ route('service-introduce') }}">Introduce</a></li>
+                            <li><a href="{{ route('service-introduce') }}">Introduce</a></li>
                             <li><a href="{{ route('photo-editing') }}">Photo Editing</a></li>
                             <li><a href="{{ route('virtual-staging') }}">Virtual staging</a></li>
                             <li><a href="{{ route('floor-plan') }}">Floor plan</a></li>
@@ -25,7 +25,7 @@
                     <li>
                         <a href="admin/banners" aria-expanded="true"><i class="ti-dashboard"></i><span>Banners</span></a>
                         <ul class="collapse">
-                            <li class="active"><a href="{{route('logos')}}">Logo</a></li>
+                            <li><a href="{{route('logos')}}">Logo</a></li>
                             <li><a href="{{route('slides')}}">Slides</a></li>
                             <li><a href="{{route('contacts')}}">Contact</a></li>
                         </ul>

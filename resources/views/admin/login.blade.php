@@ -56,6 +56,9 @@
                         <i class="ti-lock"></i>
                         <div class="text-danger"></div>
                     </div>
+                    @if (session('login-fail'))
+                        <div class="contact-message mb-3 text-danger">{{ session('login-fail') }}</div>
+                    @endif
                     <div class="submit-btn-area">
                         <button id="form_submit" >Submit <i class="ti-arrow-right"></i></button>
                     </div>

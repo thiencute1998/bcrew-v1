@@ -5,21 +5,29 @@
             cursor: pointer;
             color: darkred;
         }
-        .service-img {
-            height: 80px;
+        .td-img{
+            max-width: 325px;
+            max-height: 158px;
+            overflow: hidden;
+            margin: auto;
         }
     </style>
 @endsection
 @section('main-content-inner')
+<div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    <div class="mb-0 ml-1">
+        Filter with
+    </div>
+</div>
 <!-- page title area start -->
 <div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="row align-items-center" style="padding: 1.6rem 0;">
         <div class="col-md-6 col-sm-8">
             <div class="search-box pull-left">
-                <form action="{{ route('photo-editing') }}" method="GET" >
-                    <input type="text" name="search" placeholder="Search..." value="{{ request()->input('search') }}">
+                <form action="{{ route('service-introduce') }}" method="GET" >
+                    <input type="text" name="search" placeholder="name..." value="{{ request()->input('search') }}">
                     <i class="ti-search"></i>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary button-search">Submit</button>
                 </form>
             </div>
         </div>
@@ -57,11 +65,13 @@
                                 <tbody>
                                 @foreach($services as $service)
                                     <tr>
-                                        <th scope="row">{{$service->name}}</th>
-                                        <td>{{$service->content}}</td>
+                                        <td style="vertical-align: middle">{{$service->name}}</td>
+                                        <td class="text-left">{{$service->content}}</td>
                                         <td>
-                                            <img class="service-img" width="100px" height="80px"
-                                                 src="{{asset('upload/admin/services/introduce/' . $service->file_name)}}" alt="">
+                                            <div class="td-img">
+                                                <img class="service-img" width="100px" height="80px"
+                                                     src="{{asset('upload/admin/services/introduce/' . $service->file_name)}}" alt="">
+                                            </div>
                                         </td>
                                         <td style="vertical-align: middle">
                                             <a href="{{ route('service-introduce-edit', ['id'=> $service->id]) }}">

@@ -61,6 +61,12 @@
                             </div>
                         </div>
                     </div>
+                    @if($productDetail->description)
+                        <div>
+                            <h1><b>Descriptions: </b></h1>
+                            {!! $productDetail->description !!}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

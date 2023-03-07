@@ -8,6 +8,11 @@
     </style>
 @endsection
 @section('main-content-inner')
+    <div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="mb-0 ml-1">
+            Filter with
+        </div>
+    </div>
     <!-- page title area start -->
     <div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="row align-items-center" style="padding: 1.6rem 0;">
@@ -16,7 +21,7 @@
                     <form action="{{ route('users') }}" method="GET" >
                         <input type="text" name="search" placeholder="Search..." value="{{ request()->input('search') }}">
                         <i class="ti-search"></i>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary button-search">Submit</button>
                     </form>
                 </div>
             </div>

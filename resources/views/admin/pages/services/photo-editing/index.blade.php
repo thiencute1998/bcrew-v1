@@ -8,6 +8,11 @@
     </style>
 @endsection
 @section('main-content-inner')
+<div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    <div class="mb-0 ml-1">
+        Filter with
+    </div>
+</div>
 <!-- page title area start -->
 <div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="row align-items-center" style="padding: 1.6rem 0;">
@@ -16,7 +21,7 @@
                 <form action="{{ route('photo-editing') }}" method="GET" >
                     <input type="text" name="search" placeholder="Search..." value="{{ request()->input('search') }}">
                     <i class="ti-search"></i>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary button-search">Submit</button>
                 </form>
             </div>
         </div>
@@ -51,7 +56,6 @@
                                 <thead class="text-uppercase">
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Description</th>
                                     <th>Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -59,8 +63,7 @@
                                 <tbody>
                                 @foreach($products as $product)
                                     <tr>
-                                        <th scope="row">{{$product->name}}</th>
-                                        <td>{{$product->description}}</td>
+                                        <td style="vertical-align: middle">{{$product->name}}</td>
                                         <td style="vertical-align: middle;">
                                             @if($product->status)
                                                 <span class="text-success">Active</span>

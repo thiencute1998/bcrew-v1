@@ -25,7 +25,7 @@ class AuthController extends Controller
                 ->withSuccess('Signed in');
         }
 
-        return redirect("login")->with('Login details are not valid');
+        return redirect("login")->with('login-fail', 'Wrong email or password');
     }
 
     public function logout() {

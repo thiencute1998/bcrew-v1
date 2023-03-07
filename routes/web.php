@@ -53,7 +53,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout-auth');
 Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
     Route::get('/', function() {
         return view('admin.index');
-    });
+    })->name('admin-index');
 
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('products');
@@ -167,6 +167,8 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
         Route::post('/update/{id}', [UserController::class, 'update'])->name('users-update');
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users-delete');
         Route::post('/upload', [UserController::class, 'upload'])->name('users-upload');
+        Route::get('/edit-password', [UserController::class, 'editPassword'])->name('edit-password');
+        Route::post('/update-password', [UserController::class, 'updatePassword'])->name('update-password');
     });
 
     Route::prefix('configs')->group(function () {

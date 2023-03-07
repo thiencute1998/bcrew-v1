@@ -5,12 +5,20 @@
             cursor: pointer;
             color: darkred;
         }
-        .slide-img {
-            max-height: 100px;
+        .td-img{
+            max-width: 325px;
+            max-height: 158px;
+            overflow: hidden;
+            margin: auto;
         }
     </style>
 @endsection
 @section('main-content-inner')
+    <div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="mb-0 ml-1">
+            Filter with
+        </div>
+    </div>
     <!-- page title area start -->
     <div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="row align-items-center" style="padding: 1.6rem 0;">
@@ -62,8 +70,13 @@
                                     <tbody>
                                     @foreach($slides as $slide)
                                         <tr>
-                                            <th scope="row">{{$slide->content}}</th>
-                                            <td><img class="slide-img" width="325" height="158" src=" {{asset('upload/admin/banner/slide/' . $slide->file_name)}}" alt=""></td>
+                                            <td style="vertical-align: middle">{{$slide->content}}</td>
+                                            <td>
+                                                <div class="td-img">
+                                                    <img class="slide-img" width="325" height="158"
+                                                         src=" {{asset('upload/admin/banner/slide/' . $slide->file_name)}}" alt="">
+                                                </div>
+                                            </td>
                                             <td style="vertical-align: middle;">
                                                 @if($slide->status)
                                                     <span class="text-success">Active</span>

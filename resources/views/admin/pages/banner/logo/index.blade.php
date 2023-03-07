@@ -5,29 +5,15 @@
             cursor: pointer;
             color: darkred;
         }
-        .logo-img {
-            max-height: 100px;
+        .td-img{
+            max-width: 325px;
+            max-height: 158px;
+            overflow: hidden;
+            margin: auto;
         }
     </style>
 @endsection
 @section('main-content-inner')
-    <!-- page title area start -->
-    <div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="row align-items-center" style="padding: 1.6rem 0;">
-            <div class="col-md-6 col-sm-8">
-                <div class="search-box pull-left">
-                    <form action="{{ route('logos') }}" method="GET" >
-                        <input type="text" name="search" placeholder="Search..." value="{{ request()->input('search') }}">
-                        <i class="ti-search"></i>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-6 clearfix">
-
-            </div>
-        </div>
-    </div>
     <!-- page title area end -->
     <div class="main-content-inner">
         <div class="row">
@@ -62,8 +48,13 @@
                                     <tbody>
                                     @foreach($logos as $logo)
                                         <tr>
-                                            <th scope="row">{{$logo->name}}</th>
-                                            <td><img class="logo-img" width="325" height="158" src=" {{asset('upload/admin/banner/logo/' . $logo->file_name)}}" alt=""></td>
+                                            <td style="vertical-align: middle;">{{$logo->name}}</td>
+                                            <td>
+                                                <div class="td-img">
+                                                    <img class="logo-img" width="325" height="158"
+                                                         src=" {{asset('upload/admin/banner/logo/' . $logo->file_name)}}" alt="">
+                                                </div>
+                                            </td>
                                             <td style="vertical-align: middle;">
                                                 @if($logo->status)
                                                     <span class="text-success">Active</span>

@@ -20,6 +20,11 @@
 
 @endsection
 @section('main-content-inner')
+    <div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="mb-0 ml-1">
+            <a href="{{route('floor-plan')}}">List Floor Plan</a>
+        </div>
+    </div>
     <!-- page title area end -->
     <div class="main-content-inner">
         <div class="row">
@@ -59,11 +64,11 @@
                                             <div class="form-group product-images mr-3">
                                                 <div class="d-flex">
                                                     <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                        <input type="file" class="files-upload" name="file_start1">
+                                                        <input type="file" title="before" class="files-upload" name="file_start1">
                                                         <img width="150px" height="150px" class="product-img">
                                                     </div>
                                                     <div class="mb-3 mr-2 image-item" style="position: relative">
-                                                        <input type="file" class="files-upload" name="file_end1">
+                                                        <input type="file" title="after" class="files-upload" name="file_end1">
                                                         <img width="150px" height="150px" class="product-img">
                                                     </div>
                                                 </div>
@@ -107,11 +112,11 @@
                     '<div class="form-group product-images mr-3">' +
                     '<div class="d-flex">'+
                     '<div class="mb-3 mr-2 image-item" style="position: relative">' +
-                    '<input type="file" class="files-upload" name="file_start' + totalImage + '">' +
+                    '<input type="file" title="before" class="files-upload" name="file_start' + totalImage + '">' +
                     '<img width="150px" height="150px" class="product-img">' +
                     '</div>'+
                 '<div class="mb-3 mr-2 image-item" style="position: relative">'+
-                    '<input type="file" class="files-upload" name="file_end' + totalImage + '">'+
+                    '<input type="file" title="after" class="files-upload" name="file_end' + totalImage + '">'+
                         '<img width="150px" height="150px" class="product-img">'+
                 '</div>'+
                 '<div class="zoomimages" style="align-self: center;">'+

@@ -41,6 +41,11 @@
                                         </textarea>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-form-label">Code facebook analytics</label>
+                                        <textarea class="form-control" name="code_facebook" type="text" value="{{ $config->code_facebook }}">
+                                        </textarea>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-form-label">Email admin</label>
                                         <input class="form-control" name="email_admin" type="text" value="{{ $config->email_admin }}" >
                                     </div>
@@ -59,6 +64,10 @@
                                     <div class="form-group">
                                         <label class="col-form-label">Facebook</label>
                                         <input class="form-control" name="facebook" type="text" value="{{ $config->facebook }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Facebook page</label>
+                                        <input class="form-control" name="facebook_page" type="text" value="{{ $config->facebook_page }}">
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label">Twitter</label>

@@ -117,7 +117,7 @@
 
 
                 <iframe
-                    src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/congdongvnexpress%2F&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                    src="https://www.facebook.com/plugins/page.php?href={{$config ? $config->facebook_page : ""}}%2F&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                     width="340" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                     allowfullscreen="true"
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
@@ -134,7 +134,7 @@
 
             <div class="footer-primary pull-left">
                 <div class="copyright-footer">
-                    Copyright 2023 © <strong>Special Editing</strong></div>
+                    Copyright 2023 © <strong>{{$config->name}}</strong></div>
             </div>
         </div>
     </div>
@@ -143,3 +143,4 @@
        id="top-link" aria-label="Go to top"><i class="icon-angle-up"></i></a>
 
 </footer>
+{{$config->code_google}}

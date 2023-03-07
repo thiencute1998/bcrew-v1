@@ -54,6 +54,7 @@ class ContactUsRepository extends BaseRepository {
             }
 
             $mail->Body = $html;
+            $mail->CharSet = "UTF-8";
 
             if( !$mail->send() ) {
                 return false;

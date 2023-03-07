@@ -7,8 +7,8 @@
                 <div id="logo" class="flex-col logo">
                     <!-- Header logo -->
                     <a href="{{route('index')}}" title="{{$logoWeb ? $logoWeb->name : ""}}" rel="home">
-                        <img width="375" height="158" src="{{"upload/admin/banner/logo/". ($logoWeb ? $logoWeb->file_name : "")}}" class="header_logo header-logo" alt="{{$logoWeb ? $logoWeb->name : ""}}"/>
-                        <img  width="375" height="158" src="{{"upload/admin/banner/logo/". ($logoWeb ? $logoWeb->file_name : "")}}" class="header-logo-dark" alt="{{$logoWeb ? $logoWeb->name : ""}}"/></a>
+                        <img width="375" height="158" src="{{asset("upload/admin/banner/logo/". ($logoWeb ? $logoWeb->file_name : ""))}}" class="header_logo header-logo" alt="{{$logoWeb ? $logoWeb->name : ""}}"/>
+                        <img  width="375" height="158" src="{{asset("upload/admin/banner/logo/". ($logoWeb ? $logoWeb->file_name : ""))}}" class="header-logo-dark" alt="{{$logoWeb ? $logoWeb->name : ""}}"/></a>
                 </div>
 
                 <!-- Mobile Left Elements -->
@@ -28,7 +28,7 @@
                 <div class="flex-col hide-for-medium flex-right">
                     <ul class="header-nav header-nav-main nav nav-right  nav-uppercase">
                         <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-99 current_page_item menu-item-427 active menu-item-design-default"><a href="{{route('index')}}" aria-current="page" class="nav-top-link">Home</a></li>
-                        <li id="menu-item-293" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293 menu-item-design-default has-dropdown"><a href="https://specialediting.org/services/" class="nav-top-link">SERVICES<i class="icon-angle-down" ></i></a>
+                        <li id="menu-item-293" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-293 menu-item-design-default has-dropdown"><a href="{{route('photo_editing')}}" class="nav-top-link">SERVICES<i class="icon-angle-down" ></i></a>
                             <ul class="sub-menu nav-dropdown nav-dropdown-default">
                                 @foreach($menuServices as $menu)
                                     <li id="menu-item-434" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-434"><a href="{{route($menu->link)}}">{{strtoupper($menu->name)}}</a></li>

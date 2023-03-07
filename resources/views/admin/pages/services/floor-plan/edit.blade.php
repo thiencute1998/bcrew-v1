@@ -20,6 +20,11 @@
 
 @endsection
 @section('main-content-inner')
+    <div class="card-header filter-with" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="mb-0 ml-1">
+            <a href="{{route('floor-plan')}}">List Floor Plan</a>
+        </div>
+    </div>
     <!-- page title area end -->
     <div class="main-content-inner">
         <div class="row">

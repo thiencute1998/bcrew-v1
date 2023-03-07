@@ -46,4 +46,17 @@ class UserRepository extends BaseRepository {
         $this->model->where('id', $id)->delete();
     }
 
+    public function editPassword() {
+        $user = auth()->user();
+        return view('admin.pages.user.edit_password', compact('user'));
+    }
+
+    public function updatePassword($params) {
+        User::where('id', auth()->user()->id)->update([
+            'password'=> Hash::make($params['newPassword'])
+        ]);
+
+        return 1;
+    }
+
 }

@@ -5,29 +5,15 @@
             cursor: pointer;
             color: darkred;
         }
-        .contact-img {
-            max-height: 100px;
+        .td-img{
+            max-width: 125px;
+            max-height: 200px;
+            overflow: hidden;
+            margin: auto;
         }
     </style>
 @endsection
 @section('main-content-inner')
-    <!-- page title area start -->
-    <div class="page-title-area collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="row align-items-center" style="padding: 1.6rem 0;">
-            <div class="col-md-6 col-sm-8">
-                <div class="search-box pull-left">
-                    <form action="{{ route('contacts') }}" method="GET" >
-                        <input type="text" name="search" placeholder="content..." value="{{ request()->input('search') }}">
-                        <i class="ti-search"></i>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-sm-6 clearfix">
-
-            </div>
-        </div>
-    </div>
     <!-- page title area end -->
     <div class="main-content-inner">
         <div class="row">
@@ -62,9 +48,13 @@
                                     <tbody>
                                     @foreach($contacts as $contact)
                                         <tr>
-                                            <th scope="row">{{$contact->content}}</th>
-                                            <th scope="row">{{$contact->link}}</th>
-                                            <td><img class="contact-img" width="325" height="158" src=" {{asset('upload/admin/banner/contact/' . $contact->file_name)}}" alt=""></td>
+                                            <td style="vertical-align: middle">{{$contact->link}}</td>
+                                            <td >
+                                                <div class="td-img">
+                                                    <img class="contact-img" width="325" height="158"
+                                                         src=" {{asset('upload/admin/banner/contact/' . $contact->file_name)}}" alt="">
+                                                </div>
+                                            </td>
                                             <td style="vertical-align: middle;">
                                                 @if($contact->status)
                                                     <span class="text-success">Active</span>

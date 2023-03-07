@@ -44,6 +44,12 @@
                     </div>
                 </div>
             </div>
+            @if($productDetail->description)
+                <div>
+                    <h1><b>Descriptions: </b></h1>
+                    {!! $productDetail->description !!}
+                </div>
+            @endif
         </div>
     </div>
     <script type='text/javascript' src='{{asset('assets/viewer/js/carousel/jquery4a5f.js')}}'></script>
