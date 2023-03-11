@@ -81,6 +81,10 @@
                                         <label class="col-form-label">Instagram</label>
                                         <input class="form-control" name="instagram" type="text" value="{{ $config->instagram }}">
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Whatsapp</label>
+                                        <input class="form-control" name="whatsapp" type="text" value="{{ $config->whatsapp }}">
+                                    </div>
                                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                                 </form>
                             </div>

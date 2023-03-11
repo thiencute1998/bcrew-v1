@@ -26,7 +26,17 @@ class ContactUsRequest extends FormRequest
         return [
             //
             'name'=> 'required',
-            'email'=> 'required|email'
+            'email'=> 'required|email',
+            'file'=> 'max:51200' // 1MB
+        ];
+    }
+
+    public function messages() {
+        return [
+            'name.required'=> "Name is required",
+            'email.required'=> "Email is required",
+            'email.email'=> 'Email is not right format',
+            'file.max'=> 'File upload must be less than 50MB'
         ];
     }
 }

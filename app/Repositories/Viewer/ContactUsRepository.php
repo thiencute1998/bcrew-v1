@@ -4,6 +4,7 @@ namespace App\Repositories\Viewer;
 
 use App\Models\BannerContact;
 use App\Models\Config;
+use App\Models\ContactUs;
 use App\Repositories\BaseRepository;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -37,11 +38,14 @@ class ContactUsRepository extends BaseRepository {
 
             $mail->isHTML(true);  // Set email content format to HTML
 
-            if (isset($params['file'])) {
-                $file_tmp  = $_FILES['file']['tmp_name'];
-                $file_name = $_FILES['file']['name'];
-                $mail->addAttachment($file_tmp, $file_name);
-            }
+//            if (isset($params['file'])) {
+//                $file_tmp  = $_FILES['file']['tmp_name'];
+//                $file_name = $_FILES['file']['name'];
+//                $mail->addAttachment($file_tmp, $file_name);
+//            }
+
+            $this->store($params);
+
             $mail->Subject = $params['name'];
             $html = "<b>Info:</b><br><br>";
             $html .= "Name: " . $params['name'] . "<br>";
@@ -52,6 +56,8 @@ class ContactUsRepository extends BaseRepository {
                 $html .= "<br><br>";
                 $html .= $params['message'];
             }
+
+            $html .= "<br>" . "Link: " . $params['link'] . "<br>";
 
             $mail->Body = $html;
             $mail->CharSet = "UTF-8";
@@ -66,5 +72,28 @@ class ContactUsRepository extends BaseRepository {
         } catch (Exception $e) {
             return "error,Message could not be sent.";
         }
+    }
+
+    public function store($params) {
+        $contact = new ContactUs;
+        if (isset($params['file'])) {
+            $file = $params['file'];
+            $fileName = time() . $this->generateRandomString() . "." . $file->extension();
+            $file->move(public_path("upload/viewer/contact_us"), $fileName);
+            $params['file'] = $file->getClientOriginalName();
+            $params['file_name'] = $fileName;
+        }
+        $contact->fill($params);
+        $contact->save();
+    }
+
+    public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

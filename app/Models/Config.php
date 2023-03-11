@@ -10,7 +10,7 @@ class Config extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'keyword', 'code_google', 'email_admin', 'hotline_1', 'hotline_2',
-    'skype', 'google', 'facebook', 'twitter', 'youtube', 'instagram', 'code_facebook', 'facebook_page'
+    'skype', 'google', 'facebook', 'twitter', 'youtube', 'instagram', 'code_facebook', 'facebook_page', 'whatsapp'
     ];
 
     public $timestamps = false;

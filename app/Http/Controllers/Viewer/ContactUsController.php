@@ -21,7 +21,7 @@ class ContactUsController extends Controller
     }
 
     public function sendMail(ContactUsRequest $request) {
-        $result = $this->repository->sendMail($request->only('name', 'email', 'message', 'file'));
+        $result = $this->repository->sendMail($request->only('name', 'email', 'link', 'message', 'file'));
         if ($result) {
             return redirect()->back()->with('send-success', 'Sent success !!!');
         }

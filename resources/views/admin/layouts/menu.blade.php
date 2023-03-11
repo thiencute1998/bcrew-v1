@@ -31,6 +31,9 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="{{route('admin-contact-us')}}" aria-expanded="true"><i class="ti-dashboard"></i><span>Contact us</span></a>
+                    </li>
+                    <li>
                         <a href="{{route('works')}}" aria-expanded="true"><i class="ti-dashboard"></i><span>How to work</span></a>
                     </li>
                     <li>

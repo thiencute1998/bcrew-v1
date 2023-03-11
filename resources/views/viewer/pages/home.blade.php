@@ -10,7 +10,7 @@
             "lazyLoad": 1,
             "freeScroll": false,
             "wrapAround": true,
-            "autoPlay": 6000,
+            "autoPlay": 3000,
             "pauseAutoPlayOnHover" : true,
             "prevNextButtons": true,
             "contain" : true,
@@ -70,7 +70,7 @@
                                                                 </style>
                                                             </div>
 
-                                                            <a class="button primary is-outline free-trial"
+                                                            <a class="button primary is-outline free-trial" href="{{route('contact_us')}}"
                                                                style="border-radius:30px;">
                                                                 <span>FREE TRIAL</span>
                                                                 <i class="icon-angle-right"></i></a>

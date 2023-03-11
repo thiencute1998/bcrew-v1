@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Banner\SlideController;
 use App\Http\Controllers\Admin\Banner\BannerContactController;
 use App\Http\Controllers\Admin\HowToWorkController;
 use App\Http\Controllers\Admin\Service\ServiceIntroduceController;
+use App\Http\Controllers\Admin\AdminContactUsController;
 
 use App\Http\Controllers\Viewer\HomeController;
 use App\Http\Controllers\PhotoEditingViewerController;
@@ -148,6 +149,10 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
 
     });
 
+
+    Route::prefix('contact-us')->group(function() {
+        Route::get('/', [AdminContactUsController::class, 'index'])->name('admin-contact-us');
+    });
 
     Route::prefix('how-to-work')->group(function() {
         Route::get('/', [HowToWorkController::class, 'index'])->name('works');

@@ -52,9 +52,23 @@
                                             <option value="0">Nonactive</option>
                                         </select>
                                     </div>
+                                    <div class="form-group mt-2">
+                                        <label for="product-name" class="col-form-label">Tag (SEO)</label>
+                                        <input class="form-control" name="tag" type="text" value="{{ old('tag') }}">
+                                    </div>
+
                                     <div class="form-group">
-                                        <label for="product-description" class="col-form-label">Description</label>
-                                        <textarea class="form-control" name="description" type="text" id="description" required >
+                                        <label for="product-name" class="col-form-label">Key word (SEO)</label>
+                                        <input class="form-control" name="keyword" type="text" value="{{ old('keyword') }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="product-name" class="col-form-label">Description (SEO)</label>
+                                        <input class="form-control" name="description_seo" type="text" value="{{ old('description_seo') }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product-description" class="col-form-label">Content</label>
+                                        <textarea class="form-control" name="description" type="text" id="description">
                                         </textarea>
                                     </div>
                                     <div class="images-collection">

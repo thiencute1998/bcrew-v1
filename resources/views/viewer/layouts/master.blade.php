@@ -93,21 +93,6 @@
 
 </div>
 
-<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v6.0&autoLogAppEvents=1'
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-customerchat" attribution="wordpress" attribution_version="2.3" page_id="102511092183189"></div>
-
-<script type="text/javascript">
-    (function () {
-        var c = document.body.className;
-        c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
-        document.body.className = c;
-    })();
-</script>
 <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('assets/viewer/style/footer.css')}}' type='text/css' media='all' />
 <script type='text/javascript' src='{{asset('assets/viewer/js/regenerator-runtime.min.js?ver=0.13.9')}}' id='jquery-core-js'></script>
 <script type='text/javascript' src='{{asset('assets/viewer/js/wp-polyfill.min.js?ver=3.15.0')}}' id='jquery-core-js'></script>
@@ -117,7 +102,7 @@
     var wpcf7 = {"api":{"root":"https:\/\/specialediting.org\/wp-json\/","namespace":"contact-form-7\/v1"}};
     /* ]]> */
 </script>
-<script type='text/javascript' src='{{asset('assets/viewer/js/index.js?ver=5.5.6')}}' ></script>
+{{--<script type='text/javascript' src='{{asset('assets/viewer/js/index.js?ver=5.5.6')}}' ></script>--}}
 <script type='text/javascript' src='{{asset('assets/viewer/js/jquery.blockUI.min.js?ver=2.7.0-wc.6.4.1')}}' ></script>
 
 <script type='text/javascript' id='wc-add-to-cart-js-extra'>
@@ -140,13 +125,7 @@
 </script>
 <script type='text/javascript' src='{{asset('assets/viewer/js/cart-fragments.min.js?ver=6.4.1')}}' id='wc-cart-fragments-js'></script>
 <script type='text/javascript' src='{{asset('assets/viewer/js/flatsome-live-search.js?ver=3.15.4')}}' id='flatsome-live-search-js'></script>
-<script type='text/javascript' src='{{asset('assets/viewer/js/api.js?render=6LcvcPQgAAAAAG99TwmPqBJtAugZDKw9N3zHq5GM&#038;ver=3.0')}}' id='google-recaptcha-js'></script>
-<script type='text/javascript' id='wpcf7-recaptcha-js-extra'>
-    /* <![CDATA[ */
-    var wpcf7_recaptcha = {"sitekey":"6LcvcPQgAAAAAG99TwmPqBJtAugZDKw9N3zHq5GM","actions":{"homepage":"homepage","contactform":"contactform"}};
-    /* ]]> */
-</script>
-<script type='text/javascript' src='{{asset('assets/viewer/js/index.js?ver=5.5.6')}}' id='wpcf7-recaptcha-js'></script>
+
 <script type='text/javascript' src='{{asset('assets/viewer/js/hoverIntent.min.js')}}' id='hoverIntent-js'></script>
 <script type='text/javascript' id='flatsome-js-extra'>
     /* <![CDATA[ */
