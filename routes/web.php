@@ -24,6 +24,7 @@ use App\Http\Controllers\FloorPlanViewerController;
 use App\Http\Controllers\VideoSlideShowViewerController;
 use App\Http\Controllers\Viewer\ContactUsController;
 use App\Http\Controllers\Viewer\HowToWorkController as HowToWorkViewerController;
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -152,6 +153,9 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
 
     Route::prefix('contact-us')->group(function() {
         Route::get('/', [AdminContactUsController::class, 'index'])->name('admin-contact-us');
+        Route::get('/delete-file/{id}', [AdminContactUsController::class, 'deleteFile'])->name('admin-contact-us-delete-file');
+        Route::post('/delete-files', [AdminContactUsController::class, 'deleteFiles'])->name('admin-contact-us-delete-files');
+        Route::get('/download-file/{id}', [AdminContactUsController::class, 'downloadFile'])->name('admin-contact-us-download-file');
     });
 
     Route::prefix('how-to-work')->group(function() {
@@ -208,4 +212,8 @@ Route::prefix('contact-us')->group(function () {
     Route::post('/send-mail', [ContactUsController::class, 'sendMail'])->name('contact_us_send_mail');
 });
 Route::get('/how-to-work', [HowToWorkViewerController::class, 'index'])->name('how_to_work');
+
+//Route::get('download-file', function() {
+//   return Storage::disk('s3')->response('test-file/9gbIgpaH8fUolHZ7hI68jh1xiShtIMCZ1eiW2nmU.png');
+//});
 

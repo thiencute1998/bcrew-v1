@@ -27,7 +27,7 @@ class ContactUsRequest extends FormRequest
             //
             'name'=> 'required',
             'email'=> 'required|email',
-            'file'=> 'max:51200' // 1MB
+            'file'=> 'max:1048576' // 1GB
         ];
     }
 
@@ -36,7 +36,7 @@ class ContactUsRequest extends FormRequest
             'name.required'=> "Name is required",
             'email.required'=> "Email is required",
             'email.email'=> 'Email is not right format',
-            'file.max'=> 'File upload must be less than 50MB'
+            'file.max'=> 'File upload must be less than 1 GB'
         ];
     }
 }
