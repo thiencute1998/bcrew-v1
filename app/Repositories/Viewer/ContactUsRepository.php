@@ -81,11 +81,10 @@ class ContactUsRepository extends BaseRepository {
         if (isset($params['file'])) {
             $file = $params['file'];
             $fileName = time() . $this->generateRandomString() . "." . $file->extension();
-//            $file->move(public_path("upload/viewer/contact_us"), $fileName);
+            $file->move(public_path("upload/viewer/contact_us"), $fileName);
             $params['file'] = $file->getClientOriginalName();
             $params['file_name'] = $fileName;
-//            Storage::disk('s3')->put('avatars/1', file_get_contents($file));
-            $file->storeAs('contact-us', $fileName, 's3');
+//            $file->storeAs('contact-us', $fileName, 's3');
 
         }
         $contact->fill($params);
