@@ -97,7 +97,7 @@
         </div>
     </div>
     <script src="{{ asset('assets/admin/js/jquery341.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
+    <script src="{{ asset('assets/viewer/js/resumable.min.js') }}"></script>
     <script type="text/javascript">
         let browseFile = $('#browseFile');
         let resumable = new Resumable({
