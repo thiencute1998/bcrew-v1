@@ -36,10 +36,6 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/test', function () {
-    return view('admin.layouts.test');
-});
-
 //Route::get('products', function(Request $request) {
 //    $query = \App\Models\Product::query();
 //    $products = $query->paginate(5);
@@ -56,16 +52,6 @@ Route::prefix('admin')->middleware(['checkAuthorization'])->group(function () {
     Route::get('/', function() {
         return view('admin.index');
     })->name('admin-index');
-
-    Route::prefix('products')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('products');
-        Route::get('/create', [ProductController::class, 'create'])->name('products-create');
-        Route::post('/store', [ProductController::class, 'store'])->name('products-store');
-        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('products-edit');
-        Route::post('/update/{id}', [ProductController::class, 'update'])->name('products-update');
-        Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('products-delete');
-        Route::post('/upload', [ProductController::class, 'upload'])->name('products-upload');
-    });
 
     // services
     Route::prefix('services')->group(function () {
@@ -212,8 +198,4 @@ Route::prefix('contact-us')->group(function () {
     Route::post('/send-mail', [ContactUsController::class, 'sendMail'])->name('contact_us_send_mail');
 });
 Route::get('/how-to-work', [HowToWorkViewerController::class, 'index'])->name('how_to_work');
-
-//Route::get('download-file', function() {
-//   return Storage::disk('s3')->response('test-file/9gbIgpaH8fUolHZ7hI68jh1xiShtIMCZ1eiW2nmU.png');
-//});
 

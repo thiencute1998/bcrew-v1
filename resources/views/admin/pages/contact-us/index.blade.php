@@ -82,7 +82,7 @@
                                                 <td style="vertical-align: middle" class="text-left"><a href="{{$contact->link}}" target="_blank">{{$contact->link}}</a></td>
                                                 <td style="vertical-align: middle">{{$contact->created_at}}</td>
                                                 <td style="vertical-align: middle">
-                                                    <a title="Download file" href="{{route('admin-contact-us-download-file', ['id'=> $contact->id])}}" class="mr-2">
+                                                    <a title="Download file" href="{{asset('upload/viewer/contact_us/' . $contact->file_name)}}" download="{{$contact->file}}" class="mr-2">
                                                         <i class="fa fa-download"></i>
                                                     </a>
                                                     <a style="color: darkred;" href="{{route('admin-contact-us-delete-file', ['id'=> $contact->id])}}"
