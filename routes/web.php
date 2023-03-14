@@ -196,6 +196,7 @@ Route::prefix('video-slideshow')->group(function () {
 Route::prefix('contact-us')->group(function () {
     Route::get('/', [ContactUsController::class, 'index'])->name('contact_us');
     Route::post('/send-mail', [ContactUsController::class, 'sendMail'])->name('contact_us_send_mail');
+    Route::post('/upload-file', [ContactUsController::class, 'uploadFile'])->name('contact_us_upload_file');
 });
 Route::get('/how-to-work', [HowToWorkViewerController::class, 'index'])->name('how_to_work');
 
