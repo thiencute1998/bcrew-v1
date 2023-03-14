@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89cb81410f3caf23e206011188890de1",
+    "content-hash": "f0abb557f88d5dd8e62089eeb07a9cfd",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2564,6 +2564,130 @@
                 }
             ],
             "time": "2023-02-25T19:38:58+00:00"
+        },
+        {
+            "name": "pion/laravel-chunk-upload",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pionl/laravel-chunk-upload.git",
+                "reference": "e1ffe87e8a50a6a8cf8204c6afd46f6df99083e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pionl/laravel-chunk-upload/zipball/e1ffe87e8a50a6a8cf8204c6afd46f6df99083e6",
+                "reference": "e1ffe87e8a50a6a8cf8204c6afd46f6df99083e6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.2 - 5.8 | ^6.0 | ^7.0 | ^8.0 | ^9.0",
+                "illuminate/filesystem": "5.2 - 5.8 | ^6.0 | ^7.0 | ^8.0 | ^9.0",
+                "illuminate/http": "5.2 - 5.8 | ^6.0 | ^7.0 | ^8.0 | ^9.0",
+                "illuminate/support": "5.2 - 5.8 | ^6.0 | ^7.0 | ^8.0 | ^9.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16.0",
+                "mockery/mockery": "^1.1.0 | ^1.3.0",
+                "overtrue/phplint": "^1.1 | ^2.0",
+                "phpunit/phpunit": "5.7 | 6.0 | 7.0 | 7.5 | 8.4 | ^8.5 | ^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Pion\\Laravel\\ChunkUpload\\Providers\\ChunkUploadServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pion\\Laravel\\ChunkUpload\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Kluska",
+                    "email": "martin@kluska.cz"
+                }
+            ],
+            "description": "Service for chunked upload with several js providers",
+            "support": {
+                "issues": "https://github.com/pionl/laravel-chunk-upload/issues",
+                "source": "https://github.com/pionl/laravel-chunk-upload/tree/v1.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://revolut.me/martinpv7n",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/pionl",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-08-31T07:30:45+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "a77a43913a74f9331f637bb12867eb8e274814e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/a77a43913a74f9331f637bb12867eb8e274814e5",
+                "reference": "a77a43913a74f9331f637bb12867eb8e274814e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.3",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^8.0 || ~9.4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A flexible and feature-complete Redis client for PHP.",
+            "homepage": "http://github.com/predis/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/predis/predis/issues",
+                "source": "https://github.com/predis/predis/tree/v2.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-02T18:32:04+00:00"
         },
         {
             "name": "psr/container",

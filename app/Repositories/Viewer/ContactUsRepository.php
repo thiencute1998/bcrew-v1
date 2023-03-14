@@ -8,8 +8,12 @@ use App\Models\ContactUs;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+
 class ContactUsRepository extends BaseRepository {
     public function model()
     {
@@ -39,12 +43,6 @@ class ContactUsRepository extends BaseRepository {
             $mail->addAddress($toMail);
 
             $mail->isHTML(true);  // Set email content format to HTML
-
-//            if (isset($params['file'])) {
-//                $file_tmp  = $_FILES['file']['tmp_name'];
-//                $file_name = $_FILES['file']['name'];
-//                $mail->addAttachment($file_tmp, $file_name);
-//            }
 
             $this->store($params);
 
@@ -77,15 +75,11 @@ class ContactUsRepository extends BaseRepository {
     }
 
     public function store($params) {
-        $contact = new ContactUs;
-        if (isset($params['file'])) {
-            $file = $params['file'];
-            $fileName = time() . $this->generateRandomString() . "." . $file->extension();
-            $file->move(public_path("upload/viewer/contact_us"), $fileName);
-            $params['file'] = $file->getClientOriginalName();
-            $params['file_name'] = $fileName;
-//            $file->storeAs('contact-us', $fileName, 's3');
-
+        if (isset($params['contact_id'])) { // update
+//            dd($params);
+            $contact = ContactUs::find($params['contact_id']);
+        } else { // insert
+            $contact = new ContactUs;
         }
         $contact->fill($params);
         $contact->save();
@@ -100,4 +94,5 @@ class ContactUsRepository extends BaseRepository {
         }
         return $randomString;
     }
+
 }
