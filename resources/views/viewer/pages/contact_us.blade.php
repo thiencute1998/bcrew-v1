@@ -101,7 +101,7 @@
     <script type="text/javascript">
         let browseFile = $('#browseFile');
         let resumable = new Resumable({
-            chunkSize: 50 * 1024 * 1024, // 50MB
+            chunkSize: 10 * 1024 * 1024, // 10MB
             target: '{{ route('contact_us_upload_file') }}',
             query:{_token:'{{ csrf_token() }}'} ,// CSRF token
             headers: {
