@@ -44,7 +44,7 @@ class ContactUsController extends Controller
             $fileName = time() . $this->generateRandomString() . "." . $file->extension();
 //            $file->move(public_path("upload/viewer/contact_us"), $fileName);
             //store db
-            $path = Storage::putFileAs('videos', $file, $fileName);
+            Storage::putFileAs('videos', $file, $fileName);
             $id = $this->store($file->getClientOriginalName(), $fileName);
 
             // delete chunked file
