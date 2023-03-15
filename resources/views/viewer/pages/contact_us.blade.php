@@ -107,6 +107,7 @@
             headers: {
                 'Accept' : 'application/json'
             },
+            testChunks: false,
             throttleProgressCallbacks: 1,
         });
 
