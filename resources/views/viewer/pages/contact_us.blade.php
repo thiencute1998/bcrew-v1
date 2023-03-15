@@ -108,6 +108,7 @@
                 'Accept' : 'application/json'
             },
             testChunks: false,
+            maxFileSize: 2048 * 1024 * 1024, // 1GB
             throttleProgressCallbacks: 1,
         });
 
@@ -127,11 +128,11 @@
             response = JSON.parse(response)
             if (response.id) {
                 $('.contact-hidden').val(response.id);
+                alert('Upload file successfully');
             }
         });
 
         resumable.on('fileError', function (file, response) { // trigger when there is any error
-            alert('file uploading error.')
         });
 
 
