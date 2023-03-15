@@ -32,6 +32,7 @@ class ContactUsController extends Controller
     }
 
     public function uploadFile(Request $request) {
+        ini_set('max_execution_time', 0);
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
 
         if (!$receiver->isUploaded()) {
