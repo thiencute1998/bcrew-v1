@@ -128,7 +128,6 @@
             response = JSON.parse(response)
             if (response.id) {
                 $('.contact-hidden').val(response.id);
-                alert('Upload file successfully');
             }
         });
 

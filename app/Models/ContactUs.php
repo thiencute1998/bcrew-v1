@@ -11,6 +11,6 @@ class ContactUs extends Model
 
     protected $table = "contact_us";
 
-    protected $fillable = ['name', 'email', 'link','message','file','file_name', 'isDeleteFile'];
+    protected $fillable = ['name', 'email', 'link','message','file','file_name', 'isDeleteFile', 'file_size'];
 
 }

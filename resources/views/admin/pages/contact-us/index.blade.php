@@ -68,6 +68,7 @@
                                             <th class="text-left" scope="col" style="width: 300px;">Email</th>
                                             <th class="text-left" scope="col" style="width: 300px;">Message</th>
                                             <th class="text-left" scope="col" >Link</th>
+                                            <th scope="col" >File size</th>
                                             <th scope="col">Time</th>
                                             <th scope="col">Action</th>
                                         </tr>
@@ -80,11 +81,14 @@
                                                 <td style="vertical-align: middle" class="text-left">{{$contact->email}}</td>
                                                 <td style="vertical-align: middle" class="text-left">{!! $contact->message !!}</td>
                                                 <td style="vertical-align: middle" class="text-left"><a href="{{$contact->link}}" target="_blank">{{$contact->link}}</a></td>
+                                                <td style="vertical-align: middle" >{{$contact->file_size}}MB</td>
                                                 <td style="vertical-align: middle">{{$contact->created_at}}</td>
                                                 <td style="vertical-align: middle">
+                                                    @if ($contact->file)
                                                     <a title="Download file" href="{{asset('upload/viewer/contact_us/' . $contact->file_name)}}" download="{{$contact->file}}" class="mr-2">
                                                         <i class="fa fa-download"></i>
                                                     </a>
+                                                    @endif
                                                     <a style="color: darkred;" href="{{route('admin-contact-us-delete-file', ['id'=> $contact->id])}}"
                                                        onclick="return confirm('Are you sure to delete this file : {{ $contact->file }} ?' )"
                                                        title="Delete file">

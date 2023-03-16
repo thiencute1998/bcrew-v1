@@ -43,12 +43,13 @@ class ContactUsController extends Controller
         if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
             $file = $fileReceived->getFile(); // get file
             $fileName = time() . $this->generateRandomString() . "." . $file->extension();
+            $fileSize = round($file->getSize() / 1024, 2);
             $file->move(public_path("upload/viewer/contact_us"), $fileName);
 
 //            Storage::putFileAs('contact_us', $file, $fileName);
 
             //store db
-            $id = $this->store($file->getClientOriginalName(), $fileName);
+            $id = $this->store($file->getClientOriginalName(), $fileName, $fileSize);
 
             // delete chunked file
 //            unlink($file->getPathname());
@@ -66,10 +67,11 @@ class ContactUsController extends Controller
         ];
     }
 
-    public function store($file, $fileName) {
+    public function store($file, $fileName, $fileSize) {
         $contact = new ContactUs;
         $contact->file = $file;
         $contact->file_name = $fileName;
+        $contact->file_size = $fileSize;
         $contact->save();
         return $contact->id;
     }
