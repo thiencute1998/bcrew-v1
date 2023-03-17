@@ -75,6 +75,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($contacts as $contact)
+                                            @if($contact->is_submit)
                                             <tr>
                                                 <td><input type="checkbox" name="contact-check[]" class="check-contact" value="{{$contact->id}}"></td>
                                                 <td style="vertical-align: middle" class="text-left">{{$contact->name}}</td>
@@ -96,6 +97,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
+                                            @endif
                                         @endforeach
 
                                         </tbody>

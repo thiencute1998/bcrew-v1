@@ -6,13 +6,9 @@ use App\Models\BannerContact;
 use App\Models\Config;
 use App\Models\ContactUs;
 use App\Repositories\BaseRepository;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
-use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class ContactUsRepository extends BaseRepository {
     public function model()
@@ -75,14 +71,29 @@ class ContactUsRepository extends BaseRepository {
     }
 
     public function store($params) {
-        if (isset($params['contact_id'])) { // update
-//            dd($params);
-            $contact = ContactUs::find($params['contact_id']);
-        } else { // insert
+        if (isset($params['contact_id'])){
+            ContactUs::whereIn('id', $params['contact_id'])
+                ->update([
+                    'name'=> $params['name'],
+                    'email'=> $params['email'],
+                    'message'=> isset($params['message']) ? $params['message'] : null,
+                    'link'=> isset($params['link']) ? $params['link'] : null,
+                    'is_submit'=> 1,
+                    'created_at'=> date('Y-m-d H:i:s')
+                ]);
+        } else { // Khong Upload file
             $contact = new ContactUs;
+            $contact->created_at = date('Y-m-d H:i:s');
+            $contact->is_submit = 1;
+            $contact->fill($params);
+            $contact->save();
         }
-        $contact->fill($params);
-        $contact->save();
+        if (isset($params['contact_id_remove'])) { // remove file
+            ContactUs::whereIn('id', $params['contact_id_remove'])->delete();
+            foreach ($params['contact_file_remove'] as $item) {
+                File::delete('upload/viewer/contact_us/' . $item);
+            }
+        }
     }
 
     public function generateRandomString($length = 10) {

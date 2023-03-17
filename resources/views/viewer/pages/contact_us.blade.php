@@ -1,5 +1,12 @@
 @extends('viewer.layouts.master')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style type="text/css">
+    .contact-file-upload{
+        font-size: 20px;
+    }
+
+</style>
 @section('viewer-content')
     <style type="text/css">
         .ipixal_ctus_block1 .col1 {
@@ -42,7 +49,6 @@
                         <form action="{{route('contact_us_send_mail')}}" method="post" class="wpcf7-form init" enctype="multipart/form-data"
                               >
                             @csrf
-                            <input type="hidden" name="contact_id" class="contact-hidden">
                             <p><label> Your name<br>
                                     <span class="wpcf7-form-control-wrap your-name"><input type="text" name="name"
                                                                                            value="" size="40"
@@ -74,8 +80,11 @@
                                                                                        value="" size="40"
                                                                                        class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
                                                                                        ></span>
-                            <p><label>Upload File (Optional)</label></p>
-
+                            <p><label>Upload File compressed (.rar, .zip...)</label></p>
+                            <div class="contact-file-delete">
+                            </div>
+                            <div class="contact-file-upload mb-1">
+                            </div>
                             <div class="mb-4">
                                 <div id="upload-container">
                                     <button id="browseFile" type="button" class="btn btn-primary">Upload File</button>
@@ -127,7 +136,16 @@
         resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
             response = JSON.parse(response)
             if (response.id) {
-                $('.contact-hidden').val(response.id);
+                $('.contact-file-upload').append(
+                    '<div class="contact-file-item mr-3">' +
+                    '<span>' + response.file + '</span>' +
+                    '<input type="hidden" name="contact_id[]" value="' + response.id + '"/>' +
+                    '<input type="hidden" name="contact_file[]" value="' + response.file + '"/>' +
+                    '<input type="hidden" name="contact_file_name[]" value="' + response.file_name + '"/>' +
+                    '<sup class="contact-file-remove" data-id="' + response.id +'"' +
+                    ' data-file="' + response.file_name + '" style="cursor: pointer" title="Remove file">x</sup>' +
+                    '</div>'
+                );
             }
         });
 
@@ -151,5 +169,15 @@
         function hideProgress() {
             progress.hide();
         }
+
+        $(document).on('click', '.contact-file-remove', function() {
+            $('.contact-file-delete').append(
+                '<div>' +
+                '<input type="hidden" name="contact_id_remove[]" value="' + $(this).data('id') + '">' +
+                '<input type="hidden" name="contact_file_remove[]" value="' + $(this).data('file') + '">' +
+                '</div>'
+            );
+            $(this).closest('.contact-file-item').remove();
+        })
     </script>
 @endsection

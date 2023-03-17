@@ -25,7 +25,8 @@ class ContactUsController extends Controller
     }
 
     public function sendMail(ContactUsRequest $request) {
-        $result = $this->repository->sendMail($request->only('name', 'email', 'link', 'message', 'file', 'contact_id'));
+        $result = $this->repository->sendMail($request->only('name', 'email', 'link', 'message', 'file',
+            'contact_id', 'contact_file', 'contact_file_name', 'contact_id_remove', 'contact_file_remove'));
         if ($result) {
             return redirect()->back()->with('send-success', 'Sent success !!!');
         }
@@ -55,7 +56,9 @@ class ContactUsController extends Controller
 //            unlink($file->getPathname());
 
             return [
-                'id'=> $id
+                'id'=> $id,
+                'file'=> $file->getClientOriginalName(),
+                'file_name'=> $fileName
             ];
         }
 
